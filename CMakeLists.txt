@@ -2,6 +2,12 @@
 cmake_minimum_required (VERSION 3.8)
 project ("DXFViewer")
 
+# 设置 C++17 标准
+set(CMAKE_CXX_STANDARD 17)   # 指定 C++17 标准
+set(CMAKE_CXX_STANDARD_REQUIRED YES)  # 确保 C++17 标准是必须的
+set(CMAKE_CXX_EXTENSIONS OFF) # 禁用编译器特有的扩展
+
+
 # 搜索目录
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/deps/include/")            # 包含文件搜索目录
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/deps/include/glew-2.1.0/") # 包含文件搜索目录
@@ -26,7 +32,8 @@ set(GLAD_SRC
 
 # 框架文件
 file(GLOB CORE_SRC
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*"   
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/App/*"   
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/Core/*"   
   "${CMAKE_CURRENT_SOURCE_DIR}/src/Shader/*"  
   "${CMAKE_CURRENT_SOURCE_DIR}/src/Entity/*"  
  

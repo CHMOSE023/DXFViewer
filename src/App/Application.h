@@ -2,8 +2,8 @@
 #include <string>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "TimeStamp.h"
-#include "Camera.h"
+#include "../Core/TimeStamp.h"
+#include "../Core/OrthoCamera.h"
 class Application
 {
 public:
@@ -24,30 +24,18 @@ private:
 	static void  WindowSizeCallback(GLFWwindow* window, int width, int height);
 	static void  ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 
-	static Application* GetWindow(GLFWwindow* window);
-	glm::dvec3 CalcIntersectPoint(Ray& ray); // 射线上的目标点
-protected:
-	unsigned     CreateTexture(const char* fileName);
+	static Application* GetWindow(GLFWwindow* window); 
+ 
 
 protected:
 	int           m_winWidth;
 	int	          m_winHeight;
-	GLFWwindow*   m_pWindow;	
-	TimeStamp     m_timeStamp;     // 时间戳
-	Camera        m_camera;        // 相机
+	GLFWwindow*   m_pWindow;	 
+	OrthoCamera   m_camera;        // 相机 
 
-	double        m_elapsedTime;   // 经过时长
-	double        m_frameTime;     // 记录上一帧的时间	,一次SwapBuffers用时		
-	unsigned int  m_franerNuber;   // 帧数
-	double        m_xPos;		   // 鼠标x
-	double        m_yPos;		   // 鼠标y
-
-private:
-	bool          m_bRightFlg;	   // 鼠标右键按下 
-	glm::dvec2    m_rightPosition; // 鼠标右键按下位置
-				  
-	bool          m_bLeftFlg;	   // 鼠标左键键按下 
-	glm::dvec2    m_leftPosition;  // 鼠标左键按下位置
+	double m_LastCursorX = 0.0;
+	double m_LastCursorY = 0.0;
+	bool m_MiddleButtonPressed = false;
 	
 };
 
