@@ -2,9 +2,9 @@
 #include "Entity.h"
 #include "glm/glm.hpp"
 #include "../Shader/Shader_P2_C3.h"
-#include "../Core/Camera.h"
+#include "../Core/OrthoCamera.h"
 
-class Triangle : public Entity
+class Triangle // : public Entity
 {
 public:
 	Triangle()
@@ -34,9 +34,9 @@ public:
 
 		Vertex vertices[3] =
 		{
-			{  -0.6f, -0.4f  , 1.f, 0.f, 0.f},
-			{   0.6f, -0.4f  , 0.f, 1.f, 0.f},
-			{    0.f,  0.6f  , 0.f, 0.f, 1.f}
+			{  -1.0f, -1.0f  , 1.f, 0.f, 0.f},
+			{   1.0f, -1.0f  , 0.f, 1.f, 0.f},
+			{    0.f,  1.0f  , 0.f, 0.f, 1.f}
 		};
 
 		// Shader应用绑定顶点缓冲区数据
@@ -55,24 +55,12 @@ public:
 	}
 
 
-	virtual void Render(const Camera &camera) // 绘制
-	{
-		float ratio = camera.m_viewSize.z / (float)camera.m_viewSize.w;
-
-		glm::mat4  mvp(1);
-		glm::mat4  matView(1);
-		glm::mat4  matProj(1);
-
-		glm::mat4  matModel = glm::mat4x4(1.0);
-		matModel = glm::translate(matModel, glm::vec3(1,-0.8,0));
-		matModel = glm::scale(matModel, glm::vec3(0.3,0.3, 0.3));
-		matModel = glm::rotate(matModel, (float)glfwGetTime(), glm::vec3(0, 1, 0));
-		matProj  = glm::ortho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-		mvp = matProj * matModel;
-
+	virtual void Render(const OrthoCamera &camera) // 绘制
+	{ 
+	 
 		m_shader.Begin();
 		glBindVertexArray(m_vao);
-		glUniformMatrix4fv(m_shader.m_mvp, 1, GL_FALSE, (const GLfloat*)&mvp);
+		glUniformMatrix4fv(m_shader.m_mvp, 1, GL_FALSE, (const GLfloat*)&camera.GetViewProjectionMatrix());
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		m_shader.End();
 	}

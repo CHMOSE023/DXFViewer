@@ -1,47 +1,56 @@
 #include "OrthoCamera.h"
-
+ 
 OrthoCamera::OrthoCamera()
-    : OrthoCamera(0.0f, 1280.0f, 0.0f, 720.0f) // 默认构造，设置视口
 {
 }
 
-OrthoCamera::OrthoCamera(float left, float right, float bottom, float top)
-    : m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)),
-    m_ViewMatrix(1.0f)
+OrthoCamera::~OrthoCamera()
 {
-    m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 }
 
-void OrthoCamera::SetPosition(const glm::vec3& position)
+void OrthoCamera::SetView(int windowWidth, int windowHeight)
 {
-    m_Position = position;
-    RecalculateViewMatrix();
+    m_FixedHeight = windowHeight;
+    m_WindowWidth = windowWidth;
+    m_WindowHeight = windowHeight;
+    RecalculateMatrix();
 }
 
-void OrthoCamera::SetRotation(float rotation)
+void OrthoCamera::SetView(float fixedHeight, int windowWidth, int windowHeight)
 {
-    m_Rotation = rotation;
-    RecalculateViewMatrix();
+    m_FixedHeight = fixedHeight;
+    m_WindowWidth = windowWidth;
+    m_WindowHeight = windowHeight;
+    RecalculateMatrix();
+}
+
+void OrthoCamera::SetPosition(const glm::vec3& pos)
+{
+    m_Position = pos;
+    RecalculateMatrix();
 }
 
 void OrthoCamera::SetZoom(float zoom)
 {
     m_Zoom = zoom;
-    RecalculateViewMatrix();
+    RecalculateMatrix();
 }
 
-void OrthoCamera::RecalculateViewMatrix()
+void OrthoCamera::RecalculateMatrix()
 {
-    glm::mat4 transform =
-        glm::translate(glm::mat4(1.0f), m_Position) *
-        glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation), glm::vec3(0, 0, 1));
+    float aspect = static_cast<float>(m_WindowWidth) / m_WindowHeight;
+    float halfHeight = (m_FixedHeight * 0.5f) / m_Zoom;
+    float halfWidth = halfHeight * aspect;
 
-    m_ViewMatrix = glm::inverse(transform);
+    float left = m_Position.x - halfWidth;
+    float right = m_Position.x + halfWidth;
+    float bottom = m_Position.y - halfHeight;
+    float top = m_Position.y + halfHeight;
+
+    m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1000.0f, 1000.0f); // 扩展 zNear/zFar 范围
+
+    // 这里是关键：
+    m_ViewMatrix = glm::translate(glm::mat4(1.0f), -m_Position); // x/y/z 都考虑进去
+
     m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
-}
-
-void OrthoCamera::SetProjection(float left, float right, float bottom, float top)
-{
-    m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
-    RecalculateViewMatrix();
 }

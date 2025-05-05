@@ -50,14 +50,14 @@ void Application::CursorPositionCallback(GLFWwindow* window, double xpos, double
 
         app->m_LastCursorX = xpos;
         app->m_LastCursorY = ypos;
-
-        float zoom = app->m_camera.GetZoom();
-        float ndc_dx = static_cast<float>(dx) * (2.0f / app->m_winWidth) * zoom;
-        float ndc_dy = static_cast<float>(dy) * (2.0f / app->m_winHeight) * zoom;
-
+       
         glm::vec3 pos = app->m_camera.GetPosition();
-        pos.x -= ndc_dx * (app->m_winWidth / app->m_winHeight); // 保持比例
-        pos.y += ndc_dy;
+
+        pos.x -= (dx / app->m_camera.GetZoom() * 0.5);
+        pos.y += (dy / app->m_camera.GetZoom() * 0.5);
+      
+		//printf("pos.x = %f, pos.y = %f  \r\n", pos.x, pos.y);
+    
         app->m_camera.SetPosition(pos);
     }
 }
@@ -66,26 +66,19 @@ void Application::WindowSizeCallback(GLFWwindow* window, int width, int height)
 {
     Application* app = GetWindow(window);
     app->m_winWidth = width;
-    app->m_winHeight = height;
-
-    float aspect = static_cast<float>(width) / static_cast<float>(height);
-    float zoom = app->m_camera.GetZoom();
-
-    float viewWidth = 10.0f * zoom;
-    float viewHeight = viewWidth / aspect;
-
-    app->m_camera.SetProjection(-viewWidth / 2, viewWidth / 2, -viewHeight / 2, viewHeight / 2);
+    app->m_winHeight = height;   
+    app->m_camera.SetView(width, height);
 }
 
 void Application::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 {
     Application* app = GetWindow(window);
-    float zoom = app->m_camera.GetZoom();
-
-    // 缩放速度和范围控制
-    zoom -= static_cast<float>(yoffset) * 0.1f;
-    zoom = std::clamp(zoom, 0.1f, 10.0f);
-
+    float zoom = app->m_camera.GetZoom(); 
+    if (yoffset>0)
+        zoom = zoom * 1.15;
+    else 
+        zoom = zoom * 0.85;
+ 
     app->m_camera.SetZoom(zoom);
 }
 // 获取窗口的用户数据
@@ -106,6 +99,8 @@ void Application::Initialize(int width, int height, const char* title)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
     m_pWindow = glfwCreateWindow(width, height, title, NULL, NULL);
     m_winWidth = width;
     m_winHeight = height;
@@ -116,6 +111,24 @@ void Application::Initialize(int width, int height, const char* title)
         exit(EXIT_FAILURE);
     }
 
+    glfwDefaultWindowHints();
+
+
+
+    GLFWmonitor* primary = glfwGetPrimaryMonitor();
+    const GLFWvidmode* mode = glfwGetVideoMode(primary);    
+	// 设置窗口位置为屏幕中心
+    glfwSetWindowPos(m_pWindow, (mode->width- width)/2, (mode->height - height) / 2);
+
+	// 窗口的物理尺寸
+    int widthMM, heightMM;
+    glfwGetMonitorPhysicalSize(primary, &widthMM, &heightMM);
+
+	// 计算 DPI
+	float dpiX = static_cast<float>(mode->width) / (static_cast<float>(widthMM) );    
+    float dpiY = static_cast<float>(mode->height) / (static_cast<float>(heightMM));
+
+    glfwShowWindow(m_pWindow);
     // 设置 glfw 回调函数
     glfwSetKeyCallback(m_pWindow, KeyCallback);
     glfwSetMouseButtonCallback(m_pWindow, MouseButtonCallback);
@@ -130,10 +143,7 @@ void Application::Initialize(int width, int height, const char* title)
     glEnable(GL_DEPTH_TEST); // 开启深度测试
 
     // 设置相机
-    float aspect = static_cast<float>(width) / height;
-    float viewWidth = 10.0f;
-    float viewHeight = viewWidth / aspect;
-    m_camera.SetProjection(-viewWidth / 2, viewWidth / 2, -viewHeight / 2, viewHeight / 2);
+    m_camera.SetView(width, height);   
 
     glfwSetWindowUserPointer(m_pWindow, this);
 }
@@ -148,7 +158,7 @@ void Application::Run()
 
         glViewport(0, 0, m_winWidth, m_winHeight);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.1f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
         Render(); // 渲染数据
 
