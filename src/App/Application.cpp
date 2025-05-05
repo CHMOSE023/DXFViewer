@@ -31,10 +31,16 @@ void Application::MouseButtonCallback(GLFWwindow* window, int button, int action
         {
             app->m_MiddleButtonPressed = true;
             glfwGetCursorPos(window, &app->m_LastCursorX, &app->m_LastCursorY);
+            
+            // 设置抓手光标
+            // glfwSetCursor(window, glfwCreateStandardCursor(GLFW_HAND_CURSOR));
         }
         else if (action == GLFW_RELEASE)
         {
             app->m_MiddleButtonPressed = false;
+
+            // 恢复默认箭头光标
+            // glfwSetCursor(window, glfwCreateStandardCursor(GLFW_ARROW_CURSOR));
         }
     }
 }
@@ -168,7 +174,7 @@ void Application::Initialize(int width, int height, const char* title)
 
     // 设置相机
     m_camera.SetView(width, height);   
-
+        
     glfwSetWindowUserPointer(m_pWindow, this);
 }
 

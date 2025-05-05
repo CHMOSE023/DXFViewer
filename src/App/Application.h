@@ -32,7 +32,7 @@ protected:
 	int	          m_winHeight = 0;
 	GLFWwindow* m_pWindow = nullptr;
 	OrthoCamera   m_camera;        // Па»ъ 
-
+	 
 	double m_LastCursorX = 0.0;
 	double m_LastCursorY = 0.0;
 	bool m_MiddleButtonPressed = false;

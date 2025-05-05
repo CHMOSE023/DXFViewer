@@ -22,6 +22,7 @@ add_compile_definitions(
 # src内的文件夹
 set( EXAMPLES                   
 	 "Viewer"             
+	 "ReadDXF"             
 )
 
 # glad文件
