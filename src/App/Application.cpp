@@ -74,6 +74,8 @@ void Application::WindowSizeCallback(GLFWwindow* window, int width, int height)
     app->m_winWidth = width;
     app->m_winHeight = height;   
     app->m_camera.SetView(width, height);
+    glViewport(0, 0, width, height);
+   
 }
 
 void Application::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
@@ -183,12 +185,9 @@ void Application::Run()
     Startup(); // 准备工作
 
     while (!glfwWindowShouldClose(m_pWindow))
-    {
-        glfwGetFramebufferSize(m_pWindow, &m_winWidth, &m_winHeight);
-
-        glViewport(0, 0, m_winWidth, m_winHeight);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    {  
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         Render(); // 渲染数据
 
