@@ -10,6 +10,7 @@
 #include <vector>
 #include <map>
 #include <Windows.h>
+#include  "../Entity/Circle.h"
 
 class DXFViewer :public Application
 { 
@@ -146,12 +147,16 @@ public:
 
 		printf("读取了直线 %d 条\r\n",(m_line.GetSize()/2));
 		m_line.Init();
+
+		m_circle.AddCircle(glm::vec3(0, 0, 0), 1000.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+		m_circle.Init();
 		 
 	}; 
 
 	virtual void  Render()
 	{		  
-		m_line.Render(m_camera);
+		//m_line.Render(m_camera);
+		m_circle.Render(m_camera);
        
 	}; 
 	virtual void  Shutdown()
@@ -161,5 +166,7 @@ public:
 
 private:
     Line  m_line;
+    Circle m_circle;
+
 };
 
