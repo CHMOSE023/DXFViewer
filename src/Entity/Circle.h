@@ -13,6 +13,13 @@ public:
 	{
 		m_vao = -1;
 		m_vbo = -1;
+		// 计算圆周上的点 360
+		for (int i = 0; i < 360; ++i)
+		{
+			float angle = glm::radians(static_cast<float>(i));
+			glm::vec3 point(1.0+ cos(angle), 1.0 + sin(angle), 0);
+			m_vertices.push_back({ point.x, point.y, point.z, 0.0, 0.0,0.0 });
+		}
 	};
 	~Circle()
 	{
@@ -89,6 +96,7 @@ private:
 	Shader_P3_C3   m_shader;
 
 	std::vector<Vertex> m_vertices;
+
 	 
 
 };

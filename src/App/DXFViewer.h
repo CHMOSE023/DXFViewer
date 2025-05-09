@@ -139,23 +139,22 @@ public:
     }
 
 	virtual void  Startup()
-	{   
-        std::string filename = R"(C:\Users\ml\Desktop\Drawing1.dxf)";
+	{           
 
         // 解析文件
-        ReadLine(filename);
+        ReadLine(R"(.\Dxf\line.dxf)");
 
 		printf("读取了直线 %d 条\r\n",(m_line.GetSize()/2));
 		m_line.Init();
 
-		m_circle.AddCircle(glm::vec3(0, 0, 0), 1000.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+		// m_circle.AddCircle(glm::vec3(0, 0, 0), 5.0f, glm::vec3(1.0f, 0.0f, 1.0f));
 		m_circle.Init();
 		 
 	}; 
 
 	virtual void  Render()
 	{		  
-		//m_line.Render(m_camera);
+		m_line.Render(m_camera);
 		m_circle.Render(m_camera);
        
 	}; 
