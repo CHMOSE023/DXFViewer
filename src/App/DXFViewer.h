@@ -147,14 +147,19 @@ public:
 		printf("读取了直线 %d 条\r\n",(m_line.GetSize()/2));
 		m_line.Init();
 
-		// m_circle.AddCircle(glm::vec3(0, 0, 0), 5.0f, glm::vec3(1.0f, 0.0f, 1.0f));
 		m_circle.Init();
+		m_circle.AddCircle(glm::vec3(0, 0, 0), 5.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+		m_circle.AddCircle(glm::vec3(0, 0, 0), 4.0f, glm::vec3(1.0f, 1.0f, 0.0f));
+		m_circle.AddCircle(glm::vec3(0, 0, 0), 3.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+		m_circle.AddCircle(glm::vec3(0, 0, 0), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+		m_circle.AddCircle(glm::vec3(0, 0, 0), 1.0f, glm::vec3(0.0f, 1.0f, 1.0f));
 		 
 	}; 
 
 	virtual void  Render()
 	{		  
-		m_line.Render(m_camera);
+		// m_line.Render(m_camera);
+        glLineWidth(2.0f); // 设置线宽为 2 像素
 		m_circle.Render(m_camera);
        
 	}; 
