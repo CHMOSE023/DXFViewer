@@ -158,8 +158,9 @@ public:
 
 	virtual void  Render()
 	{		  
-		// m_line.Render(m_camera);
-        glLineWidth(2.0f); // 设置线宽为 2 像素
+        glLineWidth(1.0f); // 设置线宽为 1 像素
+		m_line.Render(m_camera);
+        glLineWidth(1.0f); // 设置线宽为 2 像素
 		m_circle.Render(m_camera);
        
 	}; 
