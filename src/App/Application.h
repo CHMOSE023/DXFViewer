@@ -30,7 +30,7 @@ private:
 protected:
 	int           m_winWidth = 0;
 	int	          m_winHeight = 0;
-	GLFWwindow* m_pWindow = nullptr;
+	GLFWwindow*   m_pWindow = nullptr;
 	OrthoCamera   m_camera;        // Па»ъ 
 	 
 	double m_LastCursorX = 0.0;

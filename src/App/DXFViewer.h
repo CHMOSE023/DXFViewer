@@ -11,11 +11,17 @@
 #include <map>
 #include <Windows.h>
 #include  "../Entity/Circle.h"
+#include  "../Entity/Part.h" 
 
 class DXFViewer :public Application
 { 
+public:
+    DXFViewer() {};
+    ~DXFViewer() {
+        delete m_dc;
+    };
 
-public:	  
+public:
     std::string UTF8ToGB(const char* str)
     {
         std::string result;
@@ -128,24 +134,26 @@ public:
 
                         glm::vec3 color = GetColorByLayer(currentLayer); // 可选
 
-                        m_line.AddLine(start, end, color);
+                        // m_line.AddLine(start, end, color);
+
+                        m_part.AddEntity(new Line2(start, end, color));
                         break;
                     }
                 }
             }
         }
 
+         
+
         file.close();
     }
 
 	virtual void  Startup()
-	{           
-
+	{          
         // 解析文件
         ReadLine(R"(.\Dxf\line.dxf)");
 
-		printf("读取了直线 %d 条\r\n",(m_line.GetSize()/2));
-		m_line.Init();
+        m_part.Serialize();
 
 		m_circle.Init();
 		m_circle.AddCircle(glm::vec3(0, 0, 0), 5.0f, glm::vec3(1.0f, 0.0f, 0.0f));
@@ -153,7 +161,14 @@ public:
 		m_circle.AddCircle(glm::vec3(0, 0, 0), 3.0f, glm::vec3(1.0f, 1.0f, 1.0f));
 		m_circle.AddCircle(glm::vec3(0, 0, 0), 2.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 		m_circle.AddCircle(glm::vec3(0, 0, 0), 1.0f, glm::vec3(0.0f, 1.0f, 1.0f));
-		 
+
+       
+        m_dc = new OpenGLDC(m_camera);
+
+        m_dc->Initialize();
+
+
+        printf(" %d 个实体\r\n", (m_part.GetEntityCount()));
 	}; 
 
 	virtual void  Render()
@@ -161,17 +176,22 @@ public:
         glLineWidth(1.0f); // 设置线宽为 1 像素
 		m_line.Render(m_camera);
         glLineWidth(1.0f); // 设置线宽为 2 像素
-		m_circle.Render(m_camera);
-       
+		m_circle.Render(m_camera); 
+
+        m_part.Draw(m_dc); 
 	}; 
+
 	virtual void  Shutdown()
 	{
 		printf("Shutdown\r\n");
 	};
 
-private:
-    Line  m_line;
-    Circle m_circle;
+public:
 
+    Line   m_line;
+    Circle m_circle;
+    Part   m_part;
+
+    OpenGLDC * m_dc;
 };
 

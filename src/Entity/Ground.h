@@ -5,7 +5,7 @@
 #include "../Shader/Shader_P3_C4_T2.h"
 #include "../Core/Camera.h"
 
-class Ground :public Entity
+class Ground// :public Entity
 {
 public:
 	Ground() 

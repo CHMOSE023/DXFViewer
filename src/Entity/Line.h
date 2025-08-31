@@ -18,8 +18,7 @@ public:
 	{
 		glDeleteVertexArrays(1, &m_vao);
 		glDeleteBuffers(1, &m_vbo);
-	};
-
+	}; 
 
 	virtual void Init()  // 数据准备
 	{
@@ -82,9 +81,31 @@ private:
 	GLuint         m_vao;
 	GLuint         m_vbo;
 	Shader_P3_C3   m_shader;
-
-	std::vector<Vertex> m_vertices;
-	 
-
+	std::vector<Vertex> m_vertices;   
 };
 
+class Line2 :public Entity
+{
+protected:
+	glm::vec3 m_start ;
+	glm::vec3 m_end;
+	glm::vec3 m_color;
+public:
+	Line2()=default;
+	Line2(glm::vec3 start, glm::vec3 end, glm::vec3 color)
+	{ 
+		m_start = start;
+		m_end = end;
+		m_color = color;
+	};
+	virtual ~Line2() = default;
+	
+	virtual   void Draw( OpenGLDC* pDc)
+	{
+		pDc->DrawLine(m_start, m_end, m_color);
+	};
+	virtual void Serialize()
+	{
+	};
+
+};
