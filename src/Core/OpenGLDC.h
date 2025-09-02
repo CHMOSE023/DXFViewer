@@ -1,3 +1,5 @@
+#pragma once
+
 #include "glm/glm.hpp" 
 #include "OrthoCamera.h" 
 #include "../Shader/ShaderManager.h"
