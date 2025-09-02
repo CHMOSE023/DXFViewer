@@ -39,8 +39,8 @@ public:
 			out vec4 FragColor;
 			
 			struct Material {
-			    sampler2D diffuse;	   // £¡£¡£¡2DÎÆÀí
-			    sampler2D specular;    // £¡£¡£¡2DÎÆÀí
+			    sampler2D diffuse;	   // ï¼ï¼ï¼2Dçº¹ç†
+			    sampler2D specular;    // ï¼ï¼ï¼2Dçº¹ç†
 			    float     shininess;
 			}; 
 			

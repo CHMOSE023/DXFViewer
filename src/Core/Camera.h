@@ -7,7 +7,7 @@
 #include <glm/gtx/string_cast.hpp>
 #include "Ray.h"
 /// <summary>
-/// ÉãÏñ»ú
+/// æ‘„åƒæœº
 /// </summary>
 class Camera
 {
@@ -15,13 +15,13 @@ public:
 	 Camera();	
 	~Camera();
 public:
-	void        CalcDir();               // ¼ÆËã¹Û²ì·½Ïò
+	void        CalcDir();               // è®¡ç®—è§‚å¯Ÿæ–¹å‘
 	glm::dvec3  GetEye() const;          
-	void        SetEye(glm::dvec3 val);   // ÉèÖÃÑÛ¾¦µÄÎ»ÖÃ
+	void        SetEye(glm::dvec3 val);   // è®¾ç½®çœ¼ç›çš„ä½ç½®
 	glm::dvec3  GetTarget() const;     
-	void        SetTarget(glm::dvec3 val); // ÉèÖÃÄ¿±êµã
+	void        SetTarget(glm::dvec3 val); // è®¾ç½®ç›®æ ‡ç‚¹
 	glm::dvec3  GetUp() const;
-	void        SetUp(glm::dvec3 val) ;    // ÉèÖÃÏòÉÏ·½Ïò
+	void        SetUp(glm::dvec3 val) ;    // è®¾ç½®å‘ä¸Šæ–¹å‘
 	glm::dvec3  GetDir() const;
 	void        SetRight(glm::dvec3 val);
 	glm::dvec3  GetRight() const;	
@@ -31,35 +31,35 @@ public:
 	void        SetProject(const glm::dmat4& proj);
 	const glm::dmat4& GetView()const;
 	const glm::dmat4& GetProject()const;
-	void        Ortho(double left, double right, double bottom, double top, double zNear, double zFar); // Õı½»Í¶Ó°
-	void        Perspective(double fovy, double aspect, double zNear, double zFar);                     // Í¸ÊÓÍ¶Ó°
+	void        Ortho(double left, double right, double bottom, double top, double zNear, double zFar); // æ­£äº¤æŠ•å½±
+	void        Perspective(double fovy, double aspect, double zNear, double zFar);                     // é€è§†æŠ•å½±
 
 	/**
-	*   ÏÂÃæµÄº¯ÊıµÄ¹¦ÄÜÊÇ½«ÉãÏñ»úµÄ¹Û²ì·½ÏòÈÆÄ³¸ö·½ÏòÖáĞı×ªÒ»¶¨µÄ½Ç¶È¸Ä±ä¹Û²ìÕßµÄÎ»ÖÃ£¬Ä¿±êµÄÎ»ÖÃ²»±ä»¯
+	*   ä¸‹é¢çš„å‡½æ•°çš„åŠŸèƒ½æ˜¯å°†æ‘„åƒæœºçš„è§‚å¯Ÿæ–¹å‘ç»•æŸä¸ªæ–¹å‘è½´æ—‹è½¬ä¸€å®šçš„è§’åº¦æ”¹å˜è§‚å¯Ÿè€…çš„ä½ç½®ï¼Œç›®æ ‡çš„ä½ç½®ä¸å˜åŒ–
 	*/
 	void       RotateViewX(double angle);
 	void       RotateViewY(double angle);
 	void       RotateViewXByCenter(double angle,glm::dvec3 pos);
 	void       RotateViewYByCenter(double angle,glm::dvec3 pos);
 	void       RotateViewZByCenter(double angle,glm::dvec3 pos);
-	void       ScaleCameraByPos(const glm::dvec3& pos, double persent); // Ö¸¶¨µãÍÆ½øÉãÏñ»ú
+	void       ScaleCameraByPos(const glm::dvec3& pos, double persent); // æŒ‡å®šç‚¹æ¨è¿›æ‘„åƒæœº
 
-	Ray        CreateRayFromScreen(int x, int y)const;                  // ²úÉúÒ»ÌõÉäÏß  
+	Ray        CreateRayFromScreen(int x, int y)const;                  // äº§ç”Ÿä¸€æ¡å°„çº¿  
 
 	void       Update();                              
 
 public:	
 	
-	glm::dvec3  m_eye;		// ÑÛ¾¦Î»ÖÃ
-	glm::dvec3  m_up;		// ÏòÉÏÎ»ÖÃ
-	glm::dvec3  m_right;	// ³¯ÓÒÎ»ÖÃ 
-	glm::dvec3  m_target;	// ÖĞĞÄµã
-	glm::dvec3  m_dir;		// ¹Û²ì·½Ïò  
-	glm::dmat4  m_matView;	// ¹Û²ì¾ØÕó
-	glm::dmat4  m_matProj;	// Í¶Ó°¾ØÕó£¨±ãÓÚ¹ÜÀí¼ÓÈë£©
-	glm::dmat4  m_matWorld;	// ÊÀ½ç¾ØÕó£¨µ¥Î»¾ØÕó£©
+	glm::dvec3  m_eye;		// çœ¼ç›ä½ç½®
+	glm::dvec3  m_up;		// å‘ä¸Šä½ç½®
+	glm::dvec3  m_right;	// æœå³ä½ç½® 
+	glm::dvec3  m_target;	// ä¸­å¿ƒç‚¹
+	glm::dvec3  m_dir;		// è§‚å¯Ÿæ–¹å‘  
+	glm::dmat4  m_matView;	// è§‚å¯ŸçŸ©é˜µ
+	glm::dmat4  m_matProj;	// æŠ•å½±çŸ©é˜µï¼ˆä¾¿äºç®¡ç†åŠ å…¥ï¼‰
+	glm::dmat4  m_matWorld;	// ä¸–ç•ŒçŸ©é˜µï¼ˆå•ä½çŸ©é˜µï¼‰
 
-	glm::dvec4  m_viewSize;	// ÊÓ¿Ú´óĞ¡£¨ÆÁÄ»×ø±êÓëÊÀ½ç×ø±êÖ®¼ä×ª»»Ê±ºòÓÃµ½£©
+	glm::dvec4  m_viewSize;	// è§†å£å¤§å°ï¼ˆå±å¹•åæ ‡ä¸ä¸–ç•Œåæ ‡ä¹‹é—´è½¬æ¢æ—¶å€™ç”¨åˆ°ï¼‰
 
 	glm::dvec3  m_oldLength;	
 };

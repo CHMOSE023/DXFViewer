@@ -1,4 +1,4 @@
-//  ¶¨Ïò¹âshader Directional Light
+//  å®šå‘å…‰shader Directional Light
 #pragma once
 #include"Shader.h"
 class ShaderLightingCastersSpotSoft :public Shader
@@ -40,22 +40,22 @@ public:
 			out vec4 FragColor;
 			
 			struct Material {
-			    sampler2D diffuse;	   // £¡£¡£¡2DÎÆÀí
-			    sampler2D specular;    // £¡£¡£¡2DÎÆÀí
+			    sampler2D diffuse;	   // ï¼ï¼ï¼2Dçº¹ç†
+			    sampler2D specular;    // ï¼ï¼ï¼2Dçº¹ç†
 			    float     shininess;
 			}; 
 			
 			struct Light {
-			    vec3  position;    // ¹âÔ´Î»ÖÃ
-				vec3  direction;   // ¾Û¹âµÄ·½ÏòÏòÁ¿
-				float cutOff;      // ¾Û¹â°ë¾¶µÄÇĞ¹â½Ç
-				float outerCutOff; // ÍâÇĞ¹â½Ç
+			    vec3  position;    // å…‰æºä½ç½®
+				vec3  direction;   // èšå…‰çš„æ–¹å‘å‘é‡
+				float cutOff;      // èšå…‰åŠå¾„çš„åˆ‡å…‰è§’
+				float outerCutOff; // å¤–åˆ‡å…‰è§’
 			   
 			    vec3 ambient;
 			    vec3 diffuse;
 			    vec3 specular;
 
-                // Ë¥¼õ¹«Ê½  ÊµÏÖË¥¼õ ¶àÏîÊ½ ³£Á¿¡¢Ò»´ÎÏîºÍ¶ş´ÎÏî  ¼ÆËã lightDir
+                // è¡°å‡å…¬å¼  å®ç°è¡°å‡ å¤šé¡¹å¼ å¸¸é‡ã€ä¸€æ¬¡é¡¹å’ŒäºŒæ¬¡é¡¹  è®¡ç®— lightDir
 				float constant;
 				float linear;
 				float quadratic;
@@ -73,7 +73,7 @@ public:
 			void main()
 			{
 				
-			    // ambient   »·¾³¹â    
+			    // ambient   ç¯å¢ƒå…‰    
 			    vec3 ambient      = light.ambient * vec3(texture(material.diffuse, TexCoords));
 			   			    
 			    // diffuse 	    
@@ -88,7 +88,7 @@ public:
 			    float spec        = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 			    vec3  specular    = light.specular * spec * vec3(texture(material.specular, TexCoords));   
 			     
-                 // spotlight (soft edges) ¹â±ßÔµÈá»¯
+                 // spotlight (soft edges) å…‰è¾¹ç¼˜æŸ”åŒ–
                  float theta = dot(lightDir, normalize(-light.direction)); 
                  float epsilon = (light.cutOff - light.outerCutOff);
                  float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
@@ -96,7 +96,7 @@ public:
                  specular *= intensity;
     
 
-			     // attenuation Ë¥¼õ¹«Ê½
+			     // attenuation è¡°å‡å…¬å¼
 			     float distance    = length(light.position - FragPos);
 			     float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
 			     

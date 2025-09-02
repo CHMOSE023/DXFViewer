@@ -2,7 +2,7 @@
 #include  "../Shader/Shader.h"
 #include  <map>
 #include <string>
-// »ù´¡¹â¼°²ÄÖÊshader
+// åŸºç¡€å…‰åŠæè´¨shader
 class ShaderMaterials : public Shader
 {
 public:
@@ -37,39 +37,39 @@ public:
             out vec4 FragColor;
   
             struct  Material {
-                 vec3 ambient;     // »·¾³¹âÕÕ
-                 vec3 diffuse;     // Âş·´Éä¹âÕÕ
-                 vec3 specular;    // ¾µÃæ¹âÕÕ
-                 float shininess;  // ·´¹â¶È
+                 vec3 ambient;     // ç¯å¢ƒå…‰ç…§
+                 vec3 diffuse;     // æ¼«åå°„å…‰ç…§
+                 vec3 specular;    // é•œé¢å…‰ç…§
+                 float shininess;  // åå…‰åº¦
             };
 
             struct Light {
-                vec3 position;     // Î»ÖÃ           
-                vec3 ambient;      // »·¾³¹â
-                vec3 diffuse;      // Âş·´Éä¹â
-                vec3 specular;     // ¾µÃæ¹â
+                vec3 position;     // ä½ç½®           
+                vec3 ambient;      // ç¯å¢ƒå…‰
+                vec3 diffuse;      // æ¼«åå°„å…‰
+                vec3 specular;     // é•œé¢å…‰
             };
           
             in vec3 Normal;  
             in vec3 FragPos;  
               
            
-            uniform vec3     viewPos;   // ¹Û²ì·½Ïò
-            uniform Material material;  // Ê¹ÓÃ½á¹¹Ìå
-            uniform Light    light;     // Ê¹ÓÃ½á¹¹Ìå
+            uniform vec3     viewPos;   // è§‚å¯Ÿæ–¹å‘
+            uniform Material material;  // ä½¿ç”¨ç»“æ„ä½“
+            uniform Light    light;     // ä½¿ç”¨ç»“æ„ä½“
             
             void main()
             {
-                // ambient »·¾³¹â             
+                // ambient ç¯å¢ƒå…‰             
                 vec3 ambient = light.ambient * material.ambient;
               	
-                // diffuse  Âş·´Éä
+                // diffuse  æ¼«åå°„
                 vec3 norm      = normalize(Normal);
                 vec3 lightDir  = normalize(light.position - FragPos);
                 float diff     = max(dot(norm, lightDir), 0.0);
                 vec3 diffuse   = light.diffuse *  (diff * material.diffuse);
                 
-                // specular ¾µÃæ¹â                
+                // specular é•œé¢å…‰                
                 vec3 viewDir    = normalize(viewPos - FragPos);
                 vec3 reflectDir = reflect(-lightDir, norm);  
                 float spec      = pow(max(dot(viewDir, reflectDir), 0.0),  material.shininess); 

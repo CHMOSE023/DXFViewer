@@ -5,7 +5,7 @@ class Entity
 {
 public:
 	Entity() = default; 
-	virtual ~Entity() = default;;  // Í¨¹ı»ùÀàÖ¸ÕëÉ¾³ıÅÉÉúÀà
-	virtual void Draw(OpenGLDC* pDc) = 0; // ´¿Ğéº¯Êı¼Ì³ĞÀà±ØĞëÊµÏÖ
-	virtual	void Serialize() {}; // ĞòÁĞ»¯
+	virtual ~Entity() = default;;  // é€šè¿‡åŸºç±»æŒ‡é’ˆåˆ é™¤æ´¾ç”Ÿç±»
+	virtual void Draw(OpenGLDC* pDc) = 0; // çº¯è™šå‡½æ•°ç»§æ‰¿ç±»å¿…é¡»å®ç°
+	virtual	void Serialize() {}; // åºåˆ—åŒ–
 };

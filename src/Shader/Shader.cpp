@@ -6,7 +6,7 @@ Shader::Shader():m_shaderId(0)
 
 Shader::~Shader()
 {
-	// É¾³ýshader
+	// åˆ é™¤shader
 	glDeleteProgram(m_shaderId);
 }
 

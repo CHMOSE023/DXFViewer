@@ -20,16 +20,16 @@ public:
 		glDeleteBuffers(1, &m_vbo);
 	}; 
 
-	virtual void Init()  // Êı¾İ×¼±¸
+	virtual void Init()  // æ•°æ®å‡†å¤‡
 	{
-		// 1.×¼±¸Shader
+		// 1.å‡†å¤‡Shader
 		m_shader.Initialize();
 		 
-		// ShaderÓ¦ÓÃ°ó¶¨¶¥µã»º³åÇøÊı¾İ
+		// Shaderåº”ç”¨ç»‘å®šé¡¶ç‚¹ç¼“å†²åŒºæ•°æ®
 		glGenVertexArrays(1, &m_vao);
 
 		glBindVertexArray(m_vao);
-		// ´´½¨ÏÔ´æ²¢Ïò¶¥µã»º³åÌî³äÊı¾İ
+		// åˆ›å»ºæ˜¾å­˜å¹¶å‘é¡¶ç‚¹ç¼“å†²å¡«å……æ•°æ®
 		glGenBuffers(1, &m_vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), m_vertices.data(), GL_STATIC_DRAW);
@@ -48,13 +48,13 @@ public:
 		m_vertices.push_back({ start.x, start.y, start.z, color.r, color.g, color.b });
 		m_vertices.push_back({ end.x, end.y, end.z, color.r, color.g, color.b });
 
-		// ¸üĞÂVBO
+		// æ›´æ–°VBO
 		//glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		//glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), m_vertices.data(), GL_DYNAMIC_DRAW);
 		//glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
-	virtual void Render(const OrthoCamera& camera) // »æÖÆ
+	virtual void Render(const OrthoCamera& camera) // ç»˜åˆ¶
 	{ 
 		m_shader.Begin();
 		glBindVertexArray(m_vao);

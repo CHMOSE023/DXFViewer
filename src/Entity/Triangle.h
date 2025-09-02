@@ -19,12 +19,12 @@ public:
 	};
 
 
-	virtual void Init()  // Êı¾İ×¼±¸
+	virtual void Init()  // æ•°æ®å‡†å¤‡
 	{	
-	    // 1.×¼±¸Shader
+	    // 1.å‡†å¤‡Shader
 		m_shader.Initialize();
 
-		// 2.×¼±¸Êı¾İ
+		// 2.å‡†å¤‡æ•°æ®
 		typedef struct Vertex
 		{
 			float x, y;
@@ -39,11 +39,11 @@ public:
 			{    0.f,  1.0f  , 0.f, 0.f, 1.f}
 		};
 
-		// ShaderÓ¦ÓÃ°ó¶¨¶¥µã»º³åÇøÊı¾İ
+		// Shaderåº”ç”¨ç»‘å®šé¡¶ç‚¹ç¼“å†²åŒºæ•°æ®
 		glGenVertexArrays(1, &m_vao);
 
 		glBindVertexArray(m_vao);
-		// ´´½¨ÏÔ´æ²¢Ïò¶¥µã»º³åÌî³äÊı¾İ
+		// åˆ›å»ºæ˜¾å­˜å¹¶å‘é¡¶ç‚¹ç¼“å†²å¡«å……æ•°æ®
 		glGenBuffers(1, &m_vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -55,7 +55,7 @@ public:
 	}
 
 
-	virtual void Render(const OrthoCamera &camera) // »æÖÆ
+	virtual void Render(const OrthoCamera &camera) // ç»˜åˆ¶
 	{ 
 	 
 		m_shader.Begin();

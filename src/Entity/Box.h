@@ -70,21 +70,21 @@ public:
         glDeleteShader(fragmentShaderID);
 
 
-        // ц©╢н╣Всц glGetUniformLocation тЖ╪сcpu ©╙оЗ║ё 
+        // Ф╞▐Ф╛║Х╟┐Г■╗ glGetUniformLocation Е╒·Е┼═cpu Е╪─И■─Ц─┌ 
         m_uniformModel      = glGetUniformLocation(m_programID, "model");
         m_uniformView       = glGetUniformLocation(m_programID, "view");
-        m_uniformProjection = glGetUniformLocation(m_programID, "projection"); //    ╤╔╣ЦфТсц╨С╡едэ╡И╣╫ж╣
+        m_uniformProjection = glGetUniformLocation(m_programID, "projection"); //    И║╤Г┌╧Е░╞Г■╗Е░▌Ф┴█Х┐╫Ф÷╔Е┬╟Е─╪
 
         GLfloat vertices[] = {
-            // ╤╔╣ЦвЬ╠Й           // яуи╚
-            -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, // вСоб╫г (╨Л)
-             0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // сроб╫г (бл)
-             0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, // срио╫г (ю╤)
-            -0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f, // вСио╫г (╩ф)
-            -0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 1.0f, // вСоб╫г (ф╥╨Л)
-             0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 1.0f, // сроб╫г (гЮ)
-             0.5f,  0.5f,  0.5f, 0.5f, 0.5f, 0.5f, // срио╫г (╩р)
-            -0.5f,  0.5f,  0.5f, 0.5f, 0.5f, 0.5f  // вСио╫г (╩р)
+            // И║╤Г┌╧Е²░Ф═┤           // И╒°Х┴╡
+            -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, // Е╥╕Д╦▀Х╖▓ (Г╨╒)
+             0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // Е▐ЁД╦▀Х╖▓ (Г╩©)
+             0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, // Е▐ЁД╦┼Х╖▓ (Х⌠²)
+            -0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f, // Е╥╕Д╦┼Х╖▓ (И╩└)
+            -0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 1.0f, // Е╥╕Д╦▀Х╖▓ (Е⌠│Г╨╒)
+             0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 1.0f, // Е▐ЁД╦▀Х╖▓ (И²▓)
+             0.5f,  0.5f,  0.5f, 0.5f, 0.5f, 0.5f, // Е▐ЁД╦┼Х╖▓ (Г│╟)
+            -0.5f,  0.5f,  0.5f, 0.5f, 0.5f, 0.5f  // Е╥╕Д╦┼Х╖▓ (Г│╟)
         };
 
         GLuint indices[] = {

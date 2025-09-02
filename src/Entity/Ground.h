@@ -20,7 +20,7 @@ public:
 		glDeleteBuffers(1, &m_vbo);
 	};
 
-	virtual void Init()  // Êı¾İ×¼±¸
+	virtual void Init()  // æ•°æ®å‡†å¤‡
 	{
 
 		 typedef struct Vertex
@@ -35,10 +35,10 @@ public:
 		 float   gPos = -1;
 		 float   rept = 15;
 
-		 // »æÖÆµØÃæÊı¾İ	
+		 // ç»˜åˆ¶åœ°é¢æ•°æ®	
 		 static const Vertex grounds[6] =
 		 {
-			 //       ¶¥µã                    ÑÕÉ«                   UV                
+			 //       é¡¶ç‚¹                    é¢œè‰²                   UV                
 			{ { -gSize, gPos,-gSize }, { 1.f, 1.f, 1.f,1.0f },{  0.0f,0.0f } },
 			{ {  gSize, gPos,-gSize }, { 1.f, 1.f, 1.f,1.0f },{  rept,0.0f } },
 			{ {  gSize, gPos, gSize }, { 1.f, 1.f, 1.f,1.0f },{  rept,rept }},
@@ -49,10 +49,10 @@ public:
 
 		 };
 
-		 // ³õÊ¼»¯shader
+		 // åˆå§‹åŒ–shader
 		 m_shader.Initialize();
 
-		 // ´´½¨ÏÔ´æ²¢Ïò¶¥µã»º³åÌî³äÊı¾İ
+		 // åˆ›å»ºæ˜¾å­˜å¹¶å‘é¡¶ç‚¹ç¼“å†²å¡«å……æ•°æ®
 	
 		 glGenBuffers(1, &m_vbo);
 		 glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
@@ -79,7 +79,7 @@ public:
 		m_texture = texture;
 	}
 
-	virtual void Render( const Camera &camera) // »æÖÆ
+	virtual void Render( const Camera &camera) // ç»˜åˆ¶
 	{
 
 		glm::mat4  mvp;
@@ -90,9 +90,9 @@ public:
 		mvp = matProj * matView * matModel;
 		
 		m_shader.Begin();
-		glActiveTexture(GL_TEXTURE0);              // ¼¤»îµÚÒ»ÕÅÎÆÀí
-		glBindTexture(GL_TEXTURE_2D, m_texture);   // Ê¹ÓÃÎÆÀí1
-		glUniform1i(m_shader.m_texture, 0);        // ÎÆÀíÃªµã
+		glActiveTexture(GL_TEXTURE0);              // æ¿€æ´»ç¬¬ä¸€å¼ çº¹ç†
+		glBindTexture(GL_TEXTURE_2D, m_texture);   // ä½¿ç”¨çº¹ç†1
+		glUniform1i(m_shader.m_texture, 0);        // çº¹ç†é”šç‚¹
 		glBindVertexArray(m_vao);
 		glUniformMatrix4fv(m_shader.m_mvp, 1, GL_FALSE, (const GLfloat*)&mvp);
 		glDrawArrays(GL_TRIANGLES, 0, 6);

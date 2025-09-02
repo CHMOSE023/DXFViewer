@@ -17,10 +17,10 @@ Camera::Camera()
 
 Camera::~Camera(){}
 
-// Ïà»ú·½Ïò
+// ç›¸æœºæ–¹å‘
 void Camera::CalcDir()
 {  
-	m_dir = glm::normalize(m_target - m_eye); // ·½Ïò = Ä¿±êÎ»ÖÃ - ÑÛ¾¦Î»ÖÃ
+	m_dir = glm::normalize(m_target - m_eye); // æ–¹å‘ = ç›®æ ‡ä½ç½® - çœ¼ç›ä½ç½®
 }
 
 void Camera::SetEye(glm::dvec3 val)
@@ -116,7 +116,7 @@ void Camera::Perspective(double fovy, double aspect, double zNear, double zFar)
 
 void Camera::RotateViewX(double angle)
 {
-	// ÑØ×ÅÏà»úÓÒ²à ÉÏÏÂ·­×ªµØÃæ
+	// æ²¿ç€ç›¸æœºå³ä¾§ ä¸Šä¸‹ç¿»è½¬åœ°é¢
 	glm::dmat4 mat(1);
 
 	mat = glm::rotate(angle, m_right);
@@ -146,7 +146,7 @@ void Camera::RotateViewY(double angle)
 
 
 #include<iostream>
-// Ö¸¶¨µãÍÆ½øÉãÏñ»ú
+// æŒ‡å®šç‚¹æ¨è¿›æ‘„åƒæœº
 void Camera::ScaleCameraByPos(const glm::dvec3& pos, double persent)
 {	
 
@@ -168,11 +168,11 @@ void Camera::ScaleCameraByPos(const glm::dvec3& pos, double persent)
 
 void Camera::RotateViewXByCenter(double angle, glm::dvec3 pos)
 {	 
-	//! ¼ÆËãÑÛ¾¦µ½Êó±êµãµÄ·½Ïò
+	//! è®¡ç®—çœ¼ç›åˆ°é¼ æ ‡ç‚¹çš„æ–¹å‘
 	glm::dvec3   vDir = pos - m_eye;
-	/// ¼ÆËãĞı×ªµãºÍÑÛ¾¦Ö®¼äµÄ¾àÀë
+	/// è®¡ç®—æ—‹è½¬ç‚¹å’Œçœ¼ç›ä¹‹é—´çš„è·ç¦»
 	double       len1 = glm::length(vDir);
-	/// Ğı×ªµãºÍÑÛ¾¦Ö±½ÓµÄ·½Ïò
+	/// æ—‹è½¬ç‚¹å’Œçœ¼ç›ç›´æ¥çš„æ–¹å‘
 	         vDir = normalize(vDir);
 	double   len  = 0;
 
@@ -181,7 +181,7 @@ void Camera::RotateViewXByCenter(double angle, glm::dvec3 pos)
 
 	vDir = glm::dvec4(vDir,1) * mat;
 
-	/// ÍÆµ¹³öÑÛ¾¦µÄÎ»ÖÃ
+	/// æ¨å€’å‡ºçœ¼ç›çš„ä½ç½®
 	m_eye = pos - vDir * len1;
 
 	m_dir = glm::dvec4(m_dir, 1) * mat;
@@ -190,7 +190,7 @@ void Camera::RotateViewXByCenter(double angle, glm::dvec3 pos)
 	m_right = glm::normalize(glm::cross(m_dir, m_up));
 
 	len = glm::length(m_eye - m_target);
-	/// ÍÆµ¼³ö¹Û²ìÖĞĞÄµãµÄÎ»ÖÃ
+	/// æ¨å¯¼å‡ºè§‚å¯Ÿä¸­å¿ƒç‚¹çš„ä½ç½®
 	m_target = m_eye + m_dir * len;
 
 	m_matView = glm::lookAt(m_eye, m_target, m_up);
@@ -241,7 +241,7 @@ void Camera::RotateViewZByCenter(double angle, glm::dvec3 pos)
 }
 
 
-// ´´½¨ÉäÏß
+// åˆ›å»ºå°„çº¿
 Ray Camera::CreateRayFromScreen(int mouseX, int mouseY) const
 {	
 	//glm::dvec3 minWorld = glm::unProject(glm::dvec3(mouseX, mouseY, 0), m_matWorld, m_matProj, m_viewSize);
@@ -257,29 +257,29 @@ Ray Camera::CreateRayFromScreen(int mouseX, int mouseY) const
 	int width = m_viewSize.z;
 	int height = m_viewSize.w;
 
-	// ½«ÆÁÄ»×ø±ê×ª»»Îª±ê×¼»¯Éè±¸×ø±ê (NDC)
+	// å°†å±å¹•åæ ‡è½¬æ¢ä¸ºæ ‡å‡†åŒ–è®¾å¤‡åæ ‡ (NDC)
 	float x = (2.0f * mouseX) / width - 1.0f;
 	float y = 1.0f - (2.0f * mouseY) / height;
 
-	// ´´½¨²Ã¼ô×ø±ê
+	// åˆ›å»ºè£å‰ªåæ ‡
 	glm::vec4 clipCoords = glm::vec4(x, y, -1.0f, 1.0f);
 
-	// ´´½¨ÄæÍ¶Ó°¾ØÕóºÍÄæÊÓÍ¼¾ØÕó
+	// åˆ›å»ºé€†æŠ•å½±çŸ©é˜µå’Œé€†è§†å›¾çŸ©é˜µ
 	glm::mat4 inverseProjectionMatrix = glm::inverse(m_matProj);
 	glm::mat4 inverseViewMatrix = glm::inverse(m_matView);
 
-	// ½«²Ã¼ô×ø±ê×ª»»ÎªÊÓÍ¼×ø±ê
+	// å°†è£å‰ªåæ ‡è½¬æ¢ä¸ºè§†å›¾åæ ‡
 	glm::dvec4 eyeCoords = inverseProjectionMatrix * clipCoords;
-	eyeCoords = glm::dvec4(eyeCoords.x, eyeCoords.y, -1.0f, 0.0f); // ·½ÏòÏòÁ¿
+	eyeCoords = glm::dvec4(eyeCoords.x, eyeCoords.y, -1.0f, 0.0f); // æ–¹å‘å‘é‡
 
-	// ½«ÊÓÍ¼×ø±ê×ª»»ÎªÊÀ½ç×ø±ê
+	// å°†è§†å›¾åæ ‡è½¬æ¢ä¸ºä¸–ç•Œåæ ‡
 	glm::dvec4 rayWorld = inverseViewMatrix * eyeCoords;
 	glm::dvec3 rayDirection = glm::normalize(glm::dvec3(rayWorld));
 
-	// ÉäÏß·½ÏòÏòÁ¿µÄÊÀ½ç×ø±ê
+	// å°„çº¿æ–¹å‘å‘é‡çš„ä¸–ç•Œåæ ‡
 
 
-	// ¼ÆËãÊ°È¡µãµÄÎ»ÖÃ
+	// è®¡ç®—æ‹¾å–ç‚¹çš„ä½ç½®
 	glm::dvec3 cameraPosition = glm::dvec3(glm::inverse(m_matView)[3]);
 	glm::dvec3 rayOrigin = cameraPosition;
 	double distanceAlongRay = -rayOrigin.z / rayDirection.z;
@@ -295,5 +295,5 @@ Ray Camera::CreateRayFromScreen(int mouseX, int mouseY) const
 
 void Camera::Update()
 {
-	m_matView = glm::lookAt(m_eye, m_target, m_up);         // ¸üĞÂÄ£ĞÍ¾ØÕó	
+	m_matView = glm::lookAt(m_eye, m_target, m_up);         // æ›´æ–°æ¨¡å‹çŸ©é˜µ	
 }

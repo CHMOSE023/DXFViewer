@@ -12,20 +12,20 @@ Ray::Ray(const glm::vec3& origin, const glm::vec3& direction)
 	m_direction = direction;
 }
 
-// ´ÓÆÁÄ»¿Õ¼ä²úÉúÒ»ÌõÉäÏßÀà
+// ä»å±å¹•ç©ºé—´äº§ç”Ÿä¸€æ¡å°„çº¿ç±»
 void Ray::ScreenPointToRay(const glm::dvec2& screenPoint, const glm::dmat4& projectionMatrix, const glm::dmat4& viewMatrix, const glm::dvec4& viewport)
 {
-    // ´ÓÆÁÄ»¿Õ¼ä×ª»»µ½²Ã¼ô¿Õ¼ä
+    // ä»å±å¹•ç©ºé—´è½¬æ¢åˆ°è£å‰ªç©ºé—´
     double x = (2.0 * screenPoint.x - viewport.z) / viewport.z;
     double y = (2.0 * screenPoint.y - viewport.w) / viewport.w;
     glm::dvec4 rayClip(x, y, -1.0, 1.0);
 
-    // ´Ó²Ã¼ô¿Õ¼ä×ª»»µ½ÊÓÍ¼¿Õ¼ä
+    // ä»è£å‰ªç©ºé—´è½¬æ¢åˆ°è§†å›¾ç©ºé—´
     glm::dmat4 inverseProjectionMatrix = glm::inverse(projectionMatrix);
     glm::dvec4 rayView = inverseProjectionMatrix * rayClip;
-    rayView = glm::dvec4(rayView.x, rayView.y, -1.0, 0.0); // ½«·½ÏòÏòÁ¿µÄz·ÖÁ¿ÉèÎª¸º£¬ÒòÎªÊÓÍ¼¿Õ¼äÖĞµÄzÖáÊÇ³¯ÏòÆÁÄ»ÍâµÄ
+    rayView = glm::dvec4(rayView.x, rayView.y, -1.0, 0.0); // å°†æ–¹å‘å‘é‡çš„zåˆ†é‡è®¾ä¸ºè´Ÿï¼Œå› ä¸ºè§†å›¾ç©ºé—´ä¸­çš„zè½´æ˜¯æœå‘å±å¹•å¤–çš„
 
-    // ´ÓÊÓÍ¼¿Õ¼ä×ª»»µ½ÊÀ½ç¿Õ¼ä
+    // ä»è§†å›¾ç©ºé—´è½¬æ¢åˆ°ä¸–ç•Œç©ºé—´
     glm::dmat4 inverseViewMatrix = glm::inverse(viewMatrix);
     glm::dvec4 rayWorld = inverseViewMatrix * rayView;
     glm::dvec3 rayDirection = glm::normalize(glm::dvec3(rayWorld));
@@ -35,32 +35,32 @@ void Ray::ScreenPointToRay(const glm::dvec2& screenPoint, const glm::dmat4& proj
     
 }
 
-//  ÉèÖÃÉäÏßµÄÆğµã
+//  è®¾ç½®å°„çº¿çš„èµ·ç‚¹
 void Ray::SetOrigin(const glm::vec3& origin)
 {
 	m_origin = origin;
 }
 
-// ÉèÖÃÉäÏßµÄ·½Ïò
+// è®¾ç½®å°„çº¿çš„æ–¹å‘
 void Ray::SetDirection(const glm::vec3& direction)
 {
 
 	m_direction = glm::normalize(direction);
 }
 
-// »ñÈ¡ÉäÏßµÄÆğµã
+// è·å–å°„çº¿çš„èµ·ç‚¹
 glm::vec3 Ray::GetOrigin() const
 {
 	return m_origin;
 }
 
-// »ñÈ¡ÉäÏßµÄ·½Ïò
+// è·å–å°„çº¿çš„æ–¹å‘
 glm::vec3 Ray::GetDirection() const
 {
 	return m_direction;
 }
 
-//  ¼ÆËãÉäÏßÉÏµÄµã
+//  è®¡ç®—å°„çº¿ä¸Šçš„ç‚¹
 glm::vec3 Ray::PointAt(float t) const
 {
 	return m_origin + t * m_direction;

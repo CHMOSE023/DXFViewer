@@ -22,7 +22,7 @@ public:
 		m_shaderLightingMaps.Initialize();
 
         float vertices[] = {
-            // 顶点                   // 法线              // 纹理
+            // 椤剁偣                   // 娉曠嚎              // 绾圭悊
             -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
              0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
              0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
@@ -105,7 +105,7 @@ public:
         lightPos.x = sin(glfwGetTime()) * 2.0f;
         lightPos.y = 0.8 + sin(glfwGetTime() / 2.0f) * 1.0f;
 
-        { //  绘制物体
+        { //  缁樺埗鐗╀綋
             m_shaderLightingMaps.Begin();
             {
                 // be sure to activate shader when setting uniforms/drawing objects
@@ -146,7 +146,7 @@ public:
         }
 
 		
-        {  // 绘制光源 
+        {  // 缁樺埗鍏夋簮 
 
             modelMat = glm::mat4(1.0f);
             modelMat = glm::translate(modelMat, lightPos);

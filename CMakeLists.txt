@@ -1,4 +1,4 @@
-﻿# CMake配置文件
+# CMake配置文件
 cmake_minimum_required (VERSION 3.8)
 project ("DXFViewer")
 
@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD 17)   # 指定 C++17 标准
 set(CMAKE_CXX_STANDARD_REQUIRED YES)  # 确保 C++17 标准是必须的
 set(CMAKE_CXX_EXTENSIONS OFF) # 禁用编译器特有的扩展
 
+add_definitions("-DUNICODE" "-D_UNICODE")
+if(MSVC) 
+   add_compile_options(/utf-8) #  设置为UTF-8编码  
+endif()
 
 # 搜索目录
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/deps/include/")            # 包含文件搜索目录
@@ -35,6 +39,7 @@ set(GLAD_SRC
 file(GLOB CORE_SRC
   "${CMAKE_CURRENT_SOURCE_DIR}/src/App/*"   
   "${CMAKE_CURRENT_SOURCE_DIR}/src/Core/*"   
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/Dxf/*"   
   "${CMAKE_CURRENT_SOURCE_DIR}/src/Shader/*"  
   "${CMAKE_CURRENT_SOURCE_DIR}/src/Entity/*"  
  
@@ -50,13 +55,14 @@ message(---------->"${CORE_SRC}")
 # 添加glad库
 add_library(glad ${GLAD_SRC})
 add_library(core ${CORE_SRC})
-
+ 
 # 遍历src文件夹内文件，添加exe程序
 foreach(Example ${EXAMPLES} )	
     message(${Example})
     file(GLOB SrcFile  "examples/${Example}/*.h"  "examples/${Example}/*.hpp"  "examples/${Example}/*.cpp" "examples/${Example}/*.c" )
-    add_executable (${Example}  ${SrcFile} )
-    target_link_libraries(${Example} glfw3 openGL32 glad core)
+    add_executable (${Example}  ${SrcFile} ) 
+    target_link_libraries(${Example} glfw3 openGL32 glad core )
 endforeach()
+
 
 # target_link_libraries(Test03-Nuklear  glew32 )

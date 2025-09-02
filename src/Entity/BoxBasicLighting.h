@@ -5,7 +5,7 @@
 #include "../Shader/ShaderCube.h"
 #include <glm/gtc/type_ptr.hpp>
 
-// 基础光照案例
+// 鍩虹鍏夌収妗堜緥
 class BoxBasicLighting :public Entity
 {  
 public:
@@ -74,7 +74,7 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-        // 盒子
+        // 鐩掑瓙
         glBindVertexArray(m_cubeVAO);
 
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -84,7 +84,7 @@ public:
         glEnableVertexAttribArray(1);
 
         
-        // 光源
+        // 鍏夋簮
         glGenVertexArrays(1, &m_lightVAO);
         glBindVertexArray(m_lightVAO);
 
@@ -101,11 +101,11 @@ public:
         glm::mat4 viewMat = camera.GetView();
         glm::mat4 modelMat = glm::mat4(1.0f);
 
-        // 灯光位置变化
+        // 鐏厜浣嶇疆鍙樺寲
         lightPos.x = 1.0f + sin(glfwGetTime()) * 2.0f;
         lightPos.y = sin(glfwGetTime() / 2.0f) * 1.0f;
 
-        {  // 绘制物体 
+        {  // 缁樺埗鐗╀綋 
 
             m_shaderLighting.Begin();
 
@@ -114,7 +114,7 @@ public:
             m_shaderLighting.SetVec3("objectColor", 0.0f, 0.5f, 0.31f);
             m_shaderLighting.SetVec3("lightColor",  1.0f, 1.0f, 1.0f);
             m_shaderLighting.SetVec3("lightPos",    lightPos);
-            m_shaderLighting.SetVec3("viewPos",     camera.GetEye());  // 相机位置
+            m_shaderLighting.SetVec3("viewPos",     camera.GetEye());  // 鐩告満浣嶇疆
 
             m_shaderLighting.SetMat4("projection",  projectionMat);
             m_shaderLighting.SetMat4("view",        viewMat);
@@ -127,7 +127,7 @@ public:
 
         }
 
-        {  // 绘制光源 
+        {  // 缁樺埗鍏夋簮 
 
             modelMat = glm::mat4(1.0f);
             modelMat = glm::translate(modelMat, lightPos);
@@ -151,7 +151,7 @@ private:
     GLuint m_cubeVAO = -1;
     GLuint m_lightVAO = -1;
     GLuint m_VBO = -1;
-    // 着色器
+    // 鐫�鑹插櫒
     ShaderCube           m_shaderCube ;
     ShaderBasicLighting  m_shaderLighting ;
 

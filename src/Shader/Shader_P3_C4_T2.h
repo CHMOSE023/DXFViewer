@@ -47,7 +47,7 @@ public:
                 {
                     vec4 textureColor = texture2D(texture,outTexCoord);
                     //fragment          = textureColor * outColor;
-                    if(textureColor.a<=0.2) // »ìºÏ
+                    if(textureColor.a<=0.2) // æ··åˆ
                     {
                        discard;
                     }else{

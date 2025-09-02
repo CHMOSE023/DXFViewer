@@ -1,4 +1,4 @@
-//  ¶¨Ïò¹âshader Directional Light
+//  å®šå‘å…‰shader Directional Light
 #pragma once
 #include"Shader.h"
 class ShaderLightingCastersPoint :public Shader
@@ -40,19 +40,19 @@ public:
 			out vec4 FragColor;
 			
 			struct Material {
-			    sampler2D diffuse;	   // £¡£¡£¡2DÎÆÀí
-			    sampler2D specular;    // £¡£¡£¡2DÎÆÀí
+			    sampler2D diffuse;	   // ï¼ï¼ï¼2Dçº¹ç†
+			    sampler2D specular;    // ï¼ï¼ï¼2Dçº¹ç†
 			    float     shininess;
 			}; 
 			
 			struct Light {
-			    vec3 position;  // ¹âÔ´Î»ÖÃ
+			    vec3 position;  // å…‰æºä½ç½®
 			   
 			    vec3 ambient;
 			    vec3 diffuse;
 			    vec3 specular;
 
-                // Ë¥¼õ¹«Ê½  ÊµÏÖË¥¼õ ¶àÏîÊ½ ³£Á¿¡¢Ò»´ÎÏîºÍ¶ş´ÎÏî  ¼ÆËã lightDir
+                // è¡°å‡å…¬å¼  å®ç°è¡°å‡ å¤šé¡¹å¼ å¸¸é‡ã€ä¸€æ¬¡é¡¹å’ŒäºŒæ¬¡é¡¹  è®¡ç®— lightDir
 				float constant;
 				float linear;
 				float quadratic;
@@ -85,7 +85,7 @@ public:
 			    vec3  specular    = light.specular * spec * vec3(texture(material.specular, TexCoords));   
 			     
 
-                 // Attenuation Ë¥¼õ¹«Ê½
+                 // Attenuation è¡°å‡å…¬å¼
                  float distance    = length(light.position - FragPos);
                  float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
 	             

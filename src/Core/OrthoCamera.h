@@ -4,8 +4,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 /// <summary>
-/// ʵ��һ������ 2D ��Ⱦ����������ࡣ
-/// �ṩ�����λ�á���ת��ͶӰ�������ͼ����Ȼ������ܡ�
+/// 实现一个用于 2D 渲染的正交相机类。
+/// 提供相机的位置、旋转、投影矩阵和视图矩阵等基本功能。
 /// </summary>
 class OrthoCamera
 {

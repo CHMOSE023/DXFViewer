@@ -14,11 +14,11 @@ public:
                 vec3  center;
                 float radius;
                 vec3  color;
-                float pad;  // ÓÃÀ´¶ÔÆë (std430 ÒªÇó vec3 ºóÒª²¹Æë³É 16 ×Ö½Ú)
+                float pad;  // ç”¨æ¥å¯¹é½ (std430 è¦æ±‚ vec3 åè¦è¡¥é½æˆ 16 å­—èŠ‚)
             };
 
             layout(std430, binding = 0) buffer CircleBuffer {
-                CircleEntity circles[];  // ¶¯Ì¬Êı×é
+                CircleEntity circles[];  // åŠ¨æ€æ•°ç»„
             };
 
             layout(location = 0) in vec3 vPos;

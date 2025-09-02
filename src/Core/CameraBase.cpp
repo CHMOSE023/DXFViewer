@@ -2,7 +2,7 @@
 #include  <Windows.h>
 CameraBase::CameraBase()
 {
-	// vec3³õÊ¼»¯
+	// vec3åˆå§‹åŒ–
 	m_eye   = glm::dvec3(0.0f);
 	m_look  = glm::dvec3(0.0f);;
 	m_up    = glm::dvec3(0.0f);;
@@ -19,27 +19,27 @@ void CameraBase::UpdateCamera(double fElapsed, int key)
 	glm::dvec3 tempLook = m_eye;
 	glm::dvec3 dir      = m_look - m_eye;
 
-	dir = glm::normalize(dir); // ¹éÒ»»¯ÊÇÖ¸½«ÏòÁ¿µÄ³¤¶ÈËõ·ÅÎª1£¬Í¬Ê±±£³ÖÆä·½Ïò²»±ä
+	dir = glm::normalize(dir); // å½’ä¸€åŒ–æ˜¯æŒ‡å°†å‘é‡çš„é•¿åº¦ç¼©æ”¾ä¸º1ï¼ŒåŒæ—¶ä¿æŒå…¶æ–¹å‘ä¸å˜
 
-	if (265 == key) // ÉÏ¼ü
+	if (265 == key) // ä¸Šé”®
 	{
 		m_eye -= (dir * - m_moveSpeed) * fElapsed;
 		m_look -= (dir * - m_moveSpeed) * fElapsed;
 	}
 
-	if (264 == key) // ÏÂ¼ü
+	if (264 == key) // ä¸‹é”®
 	{
 		m_eye += (dir * - m_moveSpeed) * fElapsed;
 		m_look += (dir * - m_moveSpeed) * fElapsed;
 	}
 
-	if (262 == key) // ×ó¼ü
+	if (262 == key) // å·¦é”®
 	{
 		m_eye -= (m_right * m_moveSpeed) * fElapsed;
 		m_look -= (m_right * m_moveSpeed) * fElapsed;
 	}
 
-	if (263 == key) // ÓÒ¼ü
+	if (263 == key) // å³é”®
 	{
 		m_eye += (m_right * m_moveSpeed) * fElapsed;
 		m_look += (m_right * m_moveSpeed) * fElapsed;
@@ -54,7 +54,7 @@ void CameraBase::UpdateCamera(double fElapsed)
 	glm::dvec3 tempLook  = m_eye;
 	glm::dvec3 dir       = m_look - m_eye;
 
-	dir = glm::normalize(dir); // ¹éÒ»»¯ÊÇÖ¸½«ÏòÁ¿µÄ³¤¶ÈËõ·ÅÎª1£¬Í¬Ê±±£³ÖÆä·½Ïò²»±ä
+	dir = glm::normalize(dir); // å½’ä¸€åŒ–æ˜¯æŒ‡å°†å‘é‡çš„é•¿åº¦ç¼©æ”¾ä¸º1ï¼ŒåŒæ—¶ä¿æŒå…¶æ–¹å‘ä¸å˜
 
 	unsigned char keys[256];
 	if (GetKeyboardState(keys)) 

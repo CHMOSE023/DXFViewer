@@ -9,14 +9,14 @@ class Application
 public:
 	Application();
 	virtual ~Application();
-	virtual void  Initialize(int width, int height, const char* title);  // 1.³õÊ¼»¯
+	virtual void  Initialize(int width, int height, const char* title);  // 1.åˆå§‹åŒ–
 	virtual void  Run();	  
-	virtual void  Startup();        // 1.×¼±¸Êı¾İ
-	virtual void  Render();         // 2.äÖÈ¾Êı¾İ
-	virtual void  Shutdown();       // 3.¹Ø±Õ
+	virtual void  Startup();        // 1.å‡†å¤‡æ•°æ®
+	virtual void  Render();         // 2.æ¸²æŸ“æ•°æ®
+	virtual void  Shutdown();       // 3.å…³é—­
 
 private:
-	// ÏµÍ³»Øµ÷º¯Êı
+	// ç³»ç»Ÿå›è°ƒå‡½æ•°
 	static void  ErrorCallback(int error, const char* description);
 	static void  KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void  MouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
@@ -31,7 +31,7 @@ protected:
 	int           m_winWidth = 0;
 	int	          m_winHeight = 0;
 	GLFWwindow*   m_pWindow = nullptr;
-	OrthoCamera   m_camera;        // Ïà»ú 
+	OrthoCamera   m_camera;        // ç›¸æœº 
 	 
 	double m_LastCursorX = 0.0;
 	double m_LastCursorY = 0.0;

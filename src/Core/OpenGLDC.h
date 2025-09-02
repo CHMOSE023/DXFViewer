@@ -16,7 +16,7 @@ typedef struct Vertex
 class OpenGLDC
 {
 public:
-	OpenGLDC(OrthoCamera& camera)   // ¡û ÒýÓÃ
+	OpenGLDC(OrthoCamera& camera)   // â† å¼•ç”¨
 		: m_camera(camera) {
 	}
 	~OpenGLDC() {};
@@ -34,7 +34,7 @@ public:
 		 
 		glBindVertexArray(m_vaoMgr["lineBuffer"]);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vboMgr["lineBuffer"]);
-		glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), m_vertices.data(), GL_DYNAMIC_DRAW); 	// ´«µÝÊý¾Ý£¬ 
+		glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), m_vertices.data(), GL_DYNAMIC_DRAW); 	// ä¼ é€’æ•°æ®ï¼Œ 
 		glUniformMatrix4fv(lineShader->m_mvp, 1, GL_FALSE, glm::value_ptr(m_camera.GetViewProjectionMatrix()));
 		glDrawArrays(GL_LINES, 0, static_cast<GLsizei>(m_vertices.size()));
 		lineShader->End();
@@ -56,15 +56,15 @@ public :
 		GLuint vbo;
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, 0, nullptr, GL_DYNAMIC_DRAW); // ÏÈ·ÖÅä¿Õ¼ä
+		glBufferData(GL_ARRAY_BUFFER, 0, nullptr, GL_DYNAMIC_DRAW); // å…ˆåˆ†é…ç©ºé—´
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		m_vboMgr["lineBuffer"] = vbo;
 		 
-		// ShaderÓ¦ÓÃ°ó¶¨¶¥µã»º³åÇøÊý¾Ý
+		// Shaderåº”ç”¨ç»‘å®šé¡¶ç‚¹ç¼“å†²åŒºæ•°æ®
 		GLuint vao;
 		glGenVertexArrays(1, &vao);			
 		glBindVertexArray(vao);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);  // ¹«ÓÃ VBO
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);  // å…¬ç”¨ VBO
 		glVertexAttribPointer(shader->m_position, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 		glEnableVertexAttribArray(shader->m_position);
 		glVertexAttribPointer(shader->m_color, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(float)));

@@ -1,4 +1,4 @@
-//  ¶¨Ïò¹âshader Directional Light
+//  å®šå‘å…‰shader Directional Light
 #pragma once
 #include"Shader.h"
 class ShaderLightingCastersSpotlightHard :public Shader
@@ -40,21 +40,21 @@ public:
 			out vec4 FragColor;
 			
 			struct Material {
-			    sampler2D diffuse;	   // £¡£¡£¡2DÎÆÀí
-			    sampler2D specular;    // £¡£¡£¡2DÎÆÀí
+			    sampler2D diffuse;	   // ï¼ï¼ï¼2Dçº¹ç†
+			    sampler2D specular;    // ï¼ï¼ï¼2Dçº¹ç†
 			    float     shininess;
 			}; 
 			
 			struct Light {
-			    vec3  position;  // ¹âÔ´Î»ÖÃ
-				vec3  direction; // ¾Û¹âµÄ·½ÏòÏòÁ¿
-				float cutOff;    // ¾Û¹â°ë¾¶µÄÇĞ¹â½Ç
+			    vec3  position;  // å…‰æºä½ç½®
+				vec3  direction; // èšå…‰çš„æ–¹å‘å‘é‡
+				float cutOff;    // èšå…‰åŠå¾„çš„åˆ‡å…‰è§’
 			   
 			    vec3 ambient;
 			    vec3 diffuse;
 			    vec3 specular;
 
-                // Ë¥¼õ¹«Ê½  ÊµÏÖË¥¼õ ¶àÏîÊ½ ³£Á¿¡¢Ò»´ÎÏîºÍ¶ş´ÎÏî  ¼ÆËã lightDir
+                // è¡°å‡å…¬å¼  å®ç°è¡°å‡ å¤šé¡¹å¼ å¸¸é‡ã€ä¸€æ¬¡é¡¹å’ŒäºŒæ¬¡é¡¹  è®¡ç®— lightDir
 				float constant;
 				float linear;
 				float quadratic;
@@ -72,7 +72,7 @@ public:
 			void main()
 			{
 				 vec3 lightDir = normalize(light.position - FragPos); 
-                 // ¼ì²éÕÕÃ÷ÊÇ·ñÔÚ¾Û¹âµÆ×¶ÄÚ
+                 // æ£€æŸ¥ç…§æ˜æ˜¯å¦åœ¨èšå…‰ç¯é”¥å†…
 			     float theta = dot(lightDir, normalize(-light.direction)); 
 				 if(theta > light.cutOff) 
 				 {
@@ -93,7 +93,7 @@ public:
 				     vec3  specular    = light.specular * spec * vec3(texture(material.specular, TexCoords));   
 				      
 				   
-				      // Attenuation Ë¥¼õ¹«Ê½
+				      // Attenuation è¡°å‡å…¬å¼
 				      float distance    = length(light.position - FragPos);
 				      float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
 				      
@@ -105,7 +105,7 @@ public:
 				 }
 				 else
 				 {
-				      // Ê¹ÓÃ»·¾³¹â£¬Ê¹³¡¾°ÔÚ¾Û¹âµÆÖ®Íâ²»»áÍêÈ«ºÚ°µ¡£
+				      // ä½¿ç”¨ç¯å¢ƒå…‰ï¼Œä½¿åœºæ™¯åœ¨èšå…‰ç¯ä¹‹å¤–ä¸ä¼šå®Œå…¨é»‘æš—ã€‚
 				      FragColor       =   vec4(light.ambient * vec3(texture(material.diffuse, TexCoords)), 1.0f);
 				 }
 		     } 

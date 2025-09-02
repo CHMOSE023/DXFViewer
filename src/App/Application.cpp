@@ -18,7 +18,7 @@ void Application::ErrorCallback(int error, const char* description)
 
 void Application::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    // ¼üÅÌÊÂ¼ş´¦ÀíÂß¼­
+    // é”®ç›˜äº‹ä»¶å¤„ç†é€»è¾‘
 }
 
 void Application::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
@@ -32,14 +32,14 @@ void Application::MouseButtonCallback(GLFWwindow* window, int button, int action
             app->m_MiddleButtonPressed = true;
             glfwGetCursorPos(window, &app->m_LastCursorX, &app->m_LastCursorY);
             
-            // ÉèÖÃ×¥ÊÖ¹â±ê
+            // è®¾ç½®æŠ“æ‰‹å…‰æ ‡
             // glfwSetCursor(window, glfwCreateStandardCursor(GLFW_HAND_CURSOR));
         }
         else if (action == GLFW_RELEASE)
         {
             app->m_MiddleButtonPressed = false;
 
-            // »Ö¸´Ä¬ÈÏ¼ıÍ·¹â±ê
+            // æ¢å¤é»˜è®¤ç®­å¤´å…‰æ ‡
             // glfwSetCursor(window, glfwCreateStandardCursor(GLFW_ARROW_CURSOR));
         }
     }
@@ -83,11 +83,11 @@ void Application::ScrollCallback(GLFWwindow* window, double xoffset, double yoff
 
     Application* app = GetWindow(window);
 
-    // 1. »ñÈ¡Êó±êÔÚ´°¿ÚÖĞµÄÎ»ÖÃ
+    // 1. è·å–é¼ æ ‡åœ¨çª—å£ä¸­çš„ä½ç½®
     double mouseX, mouseY;
     glfwGetCursorPos(window, &mouseX, &mouseY);
 
-    // 2. ½«Êó±êÆÁÄ»×ø±ê×ª»»ÎªÊÀ½ç×ø±ê
+    // 2. å°†é¼ æ ‡å±å¹•åæ ‡è½¬æ¢ä¸ºä¸–ç•Œåæ ‡
     float ndcX = (2.0f * static_cast<float>(mouseX)) / app->m_winWidth - 1.0f;
     float ndcY = 1.0f - (2.0f * static_cast<float>(mouseY)) / app->m_winHeight;
 
@@ -95,7 +95,7 @@ void Application::ScrollCallback(GLFWwindow* window, double xoffset, double yoff
     glm::mat4 invVP = glm::inverse(app->m_camera.GetViewProjectionMatrix());
     glm::vec4 worldPosBeforeZoom = invVP * ndcPos;
 
-    // 3. Ö´ĞĞËõ·Å
+    // 3. æ‰§è¡Œç¼©æ”¾
     float zoom = app->m_camera.GetZoom();
     if (yoffset > 0)
         zoom *= 1.15f;
@@ -103,17 +103,17 @@ void Application::ScrollCallback(GLFWwindow* window, double xoffset, double yoff
         zoom *= 0.85f;
     app->m_camera.SetZoom(zoom);
 
-    // 4. ÖØĞÂ¼ÆËãÊÀ½ç×ø±ê
+    // 4. é‡æ–°è®¡ç®—ä¸–ç•Œåæ ‡
     invVP = glm::inverse(app->m_camera.GetViewProjectionMatrix());
     glm::vec4 worldPosAfterZoom = invVP * ndcPos;
 
-    // 5. ±£³ÖÊó±êÎ»ÖÃ²»±ä£ºµ÷ÕûÏà»úÎ»ÖÃ
+    // 5. ä¿æŒé¼ æ ‡ä½ç½®ä¸å˜ï¼šè°ƒæ•´ç›¸æœºä½ç½®
     glm::vec3 camPos = app->m_camera.GetPosition();
     glm::vec3 offset = glm::vec3(worldPosBeforeZoom - worldPosAfterZoom); 
     app->m_camera.SetPosition(camPos + glm::vec3(offset.x*0.5,offset.y*0.5,offset.z*0.5));
 
 }
-// »ñÈ¡´°¿ÚµÄÓÃ»§Êı¾İ
+// è·å–çª—å£çš„ç”¨æˆ·æ•°æ®
 Application* Application::GetWindow(GLFWwindow* window)
 {
     void* userdata = glfwGetWindowUserPointer(window);
@@ -149,19 +149,19 @@ void Application::Initialize(int width, int height, const char* title)
 
     GLFWmonitor* primary = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(primary);    
-	// ÉèÖÃ´°¿ÚÎ»ÖÃÎªÆÁÄ»ÖĞĞÄ
+	// è®¾ç½®çª—å£ä½ç½®ä¸ºå±å¹•ä¸­å¿ƒ
     glfwSetWindowPos(m_pWindow, (mode->width- width)/2, (mode->height - height) / 2);
 
-	// ´°¿ÚµÄÎïÀí³ß´ç
+	// çª—å£çš„ç‰©ç†å°ºå¯¸
     int widthMM, heightMM;
     glfwGetMonitorPhysicalSize(primary, &widthMM, &heightMM);
 
-	// ¼ÆËã DPI
+	// è®¡ç®— DPI
 	float dpiX = static_cast<float>(mode->width) / (static_cast<float>(widthMM) );    
     float dpiY = static_cast<float>(mode->height) / (static_cast<float>(heightMM));
 
     glfwShowWindow(m_pWindow);
-    // ÉèÖÃ glfw »Øµ÷º¯Êı
+    // è®¾ç½® glfw å›è°ƒå‡½æ•°
     glfwSetKeyCallback(m_pWindow, KeyCallback);
     glfwSetMouseButtonCallback(m_pWindow, MouseButtonCallback);
     glfwSetCursorPosCallback(m_pWindow, CursorPositionCallback);
@@ -171,10 +171,10 @@ void Application::Initialize(int width, int height, const char* title)
     glfwMakeContextCurrent(m_pWindow);
 
     gladLoadGL();
-    glfwSwapInterval(1); // ´¹Ö±Í¬²½
-    glEnable(GL_DEPTH_TEST); // ¿ªÆôÉî¶È²âÊÔ
+    glfwSwapInterval(1); // å‚ç›´åŒæ­¥
+    glEnable(GL_DEPTH_TEST); // å¼€å¯æ·±åº¦æµ‹è¯•
 
-    // ÉèÖÃÏà»ú
+    // è®¾ç½®ç›¸æœº
     m_camera.SetView(width, height);   
         
     glfwSetWindowUserPointer(m_pWindow, this);
@@ -182,25 +182,25 @@ void Application::Initialize(int width, int height, const char* title)
 
 void Application::Run()
 {
-    Startup(); // ×¼±¸¹¤×÷
+    Startup(); // å‡†å¤‡å·¥ä½œ
 
     while (!glfwWindowShouldClose(m_pWindow))
     {  
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        Render(); // äÖÈ¾Êı¾İ
+        Render(); // æ¸²æŸ“æ•°æ®
 
         glfwSwapBuffers(m_pWindow);
-        glfwWaitEvents(); // µÈ´ıÊÂ¼ş
+        glfwWaitEvents(); // ç­‰å¾…äº‹ä»¶
     }
 
-    Shutdown(); // ¹Ø±Õ³ÌĞò
+    Shutdown(); // å…³é—­ç¨‹åº
 }
 
 void Application::Startup()
 {
-    // ³õÊ¼»¯Êı¾İ
+    // åˆå§‹åŒ–æ•°æ®
 }
 
 void Application::Render()
@@ -210,5 +210,5 @@ void Application::Render()
 
 void Application::Shutdown()
 {
-    // ÇåÀí×ÊÔ´
+    // æ¸…ç†èµ„æº
 }

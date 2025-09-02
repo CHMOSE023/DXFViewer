@@ -11,7 +11,7 @@ protected:
 public:
 	Part() = default;
 	~Part()override {
-		ClearEntities(); // Îö¹¹Ê±ÇåÀíËùÓĞÊµÌå
+		ClearEntities(); // ææ„æ—¶æ¸…ç†æ‰€æœ‰å®ä½“
 	};  
 
 public:
@@ -48,18 +48,18 @@ public:
 		auto it = std::remove(m_entities.begin(), m_entities.end(), entity);
 		if (it!=m_entities.end())
 		{
-			delete* it;// ÊÖ¶¯ÊÍ·ÅÄÚ´æ
+			delete* it;// æ‰‹åŠ¨é‡Šæ”¾å†…å­˜
 			m_entities.erase(it, m_entities.end());
 		}
 	}
 	 
-	// »ñÈ¡ÊµÌåÊıÁ¿
+	// è·å–å®ä½“æ•°é‡
 	size_t GetEntityCount() const noexcept
 	{
 		return m_entities.size();
 	}
 
-	// Çå¿ÕËùÓĞÊµÌå
+	// æ¸…ç©ºæ‰€æœ‰å®ä½“
 	void ClearEntities() {
 		for (auto* e : m_entities)
 			delete e;

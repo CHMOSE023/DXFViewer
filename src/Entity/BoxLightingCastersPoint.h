@@ -1,5 +1,5 @@
-// µã¹âÔ´
-// ½ü´¦Ïä×Ó±»ÕÕÁÁ Ô¶´¦Ã»ÓĞÃ»±»ÕÕÁÁ¡£
+// ç‚¹å…‰æº
+// è¿‘å¤„ç®±å­è¢«ç…§äº® è¿œå¤„æ²¡æœ‰æ²¡è¢«ç…§äº®ã€‚
 #pragma once
 #include "Entity.h"
 #include "../Shader/ShaderCube.h"
@@ -22,11 +22,11 @@ public:
 
 	void Init()
 	{      
-        m_shaderCube.Initialize(); // ³õÊ¼»¯ shander
-        m_shaderLightingCastersPoint.Initialize(); // ³õÊ¼»¯ shander
+        m_shaderCube.Initialize(); // åˆå§‹åŒ– shander
+        m_shaderLightingCastersPoint.Initialize(); // åˆå§‹åŒ– shander
 
         float vertices[] = {
-            // ¶¥µã                   // ·¨Ïß              // ÎÆÀí
+            // é¡¶ç‚¹                   // æ³•çº¿              // çº¹ç†
             -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
              0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
              0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
@@ -124,11 +124,11 @@ public:
         //lightPos.x = sin(glfwGetTime()) * 2.0f;
         //lightPos.y = 0.8 + sin(glfwGetTime() / 2.0f) * 1.0f;
 
-        //  »æÖÆÎïÌå
+        //  ç»˜åˆ¶ç‰©ä½“
         m_shaderLightingCastersPoint.Begin();
         {
             // be sure to activate shader when setting uniforms/drawing objects               
-            m_shaderLightingCastersPoint.SetVec3("light.position", lightPos); // ¶¨Ïò¹â·½Ïò
+            m_shaderLightingCastersPoint.SetVec3("light.position", lightPos); // å®šå‘å…‰æ–¹å‘
             m_shaderLightingCastersPoint.SetVec3("viewPos", lightPos);
 
             // light properties
@@ -155,7 +155,7 @@ public:
             glBindTexture(GL_TEXTURE_2D, m_specularMap);
 
             
-            // »æÖÆ10¸öÁ¢·½Ìå
+            // ç»˜åˆ¶10ä¸ªç«‹æ–¹ä½“
             glBindVertexArray(m_cubeVAO);
             for (GLuint i = 0; i < 10; i++)
             {                    
@@ -172,7 +172,7 @@ public:
        
 
 
-        {  // »æÖÆ¹âÔ´ 
+        {  // ç»˜åˆ¶å…‰æº 
 
             modelMat = glm::mat4(1.0f);
             modelMat = glm::translate(modelMat, lightPos);

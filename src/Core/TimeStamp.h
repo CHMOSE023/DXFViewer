@@ -5,17 +5,17 @@ class TimeStamp
 public:
 	TimeStamp()
 	{
-		::QueryPerformanceFrequency(&m_Frequency); // »ñÈ¡ CPU µÄ¸ß¾«¶È¼ÆÊ±Æ÷µÄÆµÂÊ
-		::QueryPerformanceCounter(&m_Start);       // »ñÈ¡µ±Ç° CPU ÖÜÆÚ¼ÆÊıÖµ
+		::QueryPerformanceFrequency(&m_Frequency); // è·å– CPU çš„é«˜ç²¾åº¦è®¡æ—¶å™¨çš„é¢‘ç‡
+		::QueryPerformanceCounter(&m_Start);       // è·å–å½“å‰ CPU å‘¨æœŸè®¡æ•°å€¼
 	}
 	~TimeStamp() {};
 
 	void Update()
 	{
-		::QueryPerformanceCounter(&m_Start);      // »ñÈ¡µ±Ç° CPU ÖÜÆÚ¼ÆÊıÖµ
+		::QueryPerformanceCounter(&m_Start);      // è·å–å½“å‰ CPU å‘¨æœŸè®¡æ•°å€¼
 	}
 
-	double   GetElapsedSecond() const              // »ñÈ¡¾­¹ıµÄÃëÊı
+	double   GetElapsedSecond() const              // è·å–ç»è¿‡çš„ç§’æ•°
 	{
 		LARGE_INTEGER   cur;
 		QueryPerformanceCounter(&cur);

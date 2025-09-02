@@ -2,7 +2,7 @@
 #include  "../Shader/Shader.h"
 #include  <map>
 #include <string>
-// »ù´¡¹ØÕÕ
+// åŸºç¡€å…³ç…§
 class ShaderBasicLighting : public Shader
 {
 public:
@@ -27,8 +27,8 @@ public:
             {
                 FragPos = vec3(model * vec4(aPos, 1.0));
                 
-                // Normal ·¨Ïß¾ØÕó  ¿ÉÒÔ´Ócpu¼ÆËãºÃ´«Èë¡£
-                Normal  = mat3(transpose(inverse(model))) * aNormal; // 3¡Á3¾ØÕó£¬À´±£Ö¤ËüÊ§È¥ÁËÎ»ÒÆÊôĞÔÒÔ¼°ÄÜ¹»³ËÒÔvec3µÄ·¨ÏòÁ¿
+                // Normal æ³•çº¿çŸ©é˜µ  å¯ä»¥ä»cpuè®¡ç®—å¥½ä¼ å…¥ã€‚
+                Normal  = mat3(transpose(inverse(model))) * aNormal; // 3Ã—3çŸ©é˜µï¼Œæ¥ä¿è¯å®ƒå¤±å»äº†ä½ç§»å±æ€§ä»¥åŠèƒ½å¤Ÿä¹˜ä»¥vec3çš„æ³•å‘é‡
                 
                 gl_Position = projection * view * vec4(FragPos, 1.0);
             }
@@ -48,24 +48,24 @@ public:
             
             void main()
             {
-                // ambient »·¾³¹âÕÕ Ambient Lighting
+                // ambient ç¯å¢ƒå…‰ç…§ Ambient Lighting
 
                 float ambientStrength = 0.1;
                 vec3  ambient         = ambientStrength * lightColor;               
 
-                // diffuse  Âş·´Éä¹âÕÕ Diffuse Lighting
+                // diffuse  æ¼«åå°„å…‰ç…§ Diffuse Lighting
 
-                vec3  norm     = normalize(Normal);               // ·¨ÏòÁ¿±ê×¼»¯
-                vec3  lightDir = normalize(lightPos - FragPos);   // ±ê×¼»¯ ¼ÆËãÏòÁ¿²î
-                float diff     = max(dot(norm, lightDir), 0.0);   // normºÍlightDirÏòÁ¿½øĞĞµã³Ë £¬Á½¸öÏòÁ¿Ö®¼äµÄ½Ç¶ÈÔ½´ó£¬Âş·´Éä·ÖÁ¿¾Í»áÔ½Ğ¡
-                vec3  diffuse  = diff * lightColor;               // £¡£¡£¡È±ÉÙ·¨Ïß¾ØÕó¼ÆËã ±äĞÎºóÊ§Õæ
+                vec3  norm     = normalize(Normal);               // æ³•å‘é‡æ ‡å‡†åŒ–
+                vec3  lightDir = normalize(lightPos - FragPos);   // æ ‡å‡†åŒ– è®¡ç®—å‘é‡å·®
+                float diff     = max(dot(norm, lightDir), 0.0);   // normå’ŒlightDirå‘é‡è¿›è¡Œç‚¹ä¹˜ ï¼Œä¸¤ä¸ªå‘é‡ä¹‹é—´çš„è§’åº¦è¶Šå¤§ï¼Œæ¼«åå°„åˆ†é‡å°±ä¼šè¶Šå°
+                vec3  diffuse  = diff * lightColor;               // ï¼ï¼ï¼ç¼ºå°‘æ³•çº¿çŸ©é˜µè®¡ç®— å˜å½¢åå¤±çœŸ
                 
-                // specular ¾µÃæ¹âÕÕ(Specular Lighting)
+                // specular é•œé¢å…‰ç…§(Specular Lighting)
 
-                float specularStrength = 0.5;                    // ¾µÃæÇ¿¶È(Specular Intensity)±äÁ¿
+                float specularStrength = 0.5;                    // é•œé¢å¼ºåº¦(Specular Intensity)å˜é‡
 
-                vec3  viewDir    = normalize(viewPos - FragPos); // ¼ÆËãÊÓÏß·½ÏòÏòÁ¿
-                vec3  reflectDir = reflect(-lightDir, norm);     // ·¨ÏßÖáµÄ·´ÉäÏòÁ¿
+                vec3  viewDir    = normalize(viewPos - FragPos); // è®¡ç®—è§†çº¿æ–¹å‘å‘é‡
+                vec3  reflectDir = reflect(-lightDir, norm);     // æ³•çº¿è½´çš„åå°„å‘é‡
                 float spec       = pow(max(dot(viewDir, reflectDir), 0.0), 50); 
                 vec3  specular   = specularStrength * spec * lightColor;  
                     

@@ -1,4 +1,4 @@
-//  ¶¨Ïò¹âshader Directional Light
+//  å®šå‘å…‰shader Directional Light
 #pragma once
 #include"Shader.h"
 class ShaderLightingCastersDirectional :public Shader
@@ -40,14 +40,14 @@ public:
 			out vec4 FragColor;
 			
 			struct Material {
-			    sampler2D diffuse;	   // £¡£¡£¡2DÎÆÀí
-			    sampler2D specular;    // £¡£¡£¡2DÎÆÀí
+			    sampler2D diffuse;	   // ï¼ï¼ï¼2Dçº¹ç†
+			    sampler2D specular;    // ï¼ï¼ï¼2Dçº¹ç†
 			    float     shininess;
 			}; 
 			
 			struct Light {
-			    // vec3 position;  // ÏÖÔÚ²»ÔÚĞèÒª¹âÔ´Î»ÖÃÁË£¬ÒòÎªËüÊÇÎŞÏŞÔ¶µÄ
-			    vec3 direction;    // Í¨¹ı¶¨ÒåÒ»¸ö¹âµÄ·½ÏòÏòÁ¿£¬À´Ä£ÄâÕâÑùÒ»¸ö¶¨Ïò¹â
+			    // vec3 position;  // ç°åœ¨ä¸åœ¨éœ€è¦å…‰æºä½ç½®äº†ï¼Œå› ä¸ºå®ƒæ˜¯æ— é™è¿œçš„
+			    vec3 direction;    // é€šè¿‡å®šä¹‰ä¸€ä¸ªå…‰çš„æ–¹å‘å‘é‡ï¼Œæ¥æ¨¡æ‹Ÿè¿™æ ·ä¸€ä¸ªå®šå‘å…‰
 
 			    vec3 ambient;
 			    vec3 diffuse;
@@ -69,7 +69,7 @@ public:
 			  				    
 			    // diffuse 	    
 			    vec3  norm        = normalize(Normal);		
-                                  // ¶Ôlight.directionÏòÁ¿È¡·´	    
+                                  // å¯¹light.directionå‘é‡å–å	    
 			    vec3  lightDir    = normalize(-light.direction);  
 			    float diff        = max(dot(norm, lightDir), 0.0);
 			    vec3  diffuse     = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));

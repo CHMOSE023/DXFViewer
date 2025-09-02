@@ -74,7 +74,7 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-        // 盒子
+        // 鐩掑瓙
         glBindVertexArray(m_cubeVAO);
 
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -84,7 +84,7 @@ public:
         glEnableVertexAttribArray(1);
 
         
-        // 光源
+        // 鍏夋簮
         glGenVertexArrays(1, &m_lightVAO);
         glBindVertexArray(m_lightVAO);
 
@@ -104,14 +104,14 @@ public:
         lightPos.x = sin(glfwGetTime()) * 2.0f;
         lightPos.y = 0.8 + sin(glfwGetTime() / 2.0f) * 1.0f;
 
-        {  // 绘制物体 
+        {  // 缁樺埗鐗╀綋 
 
             m_shaderMaterials.Begin();
 
             modelMat = glm::rotate(modelMat, (float)glfwGetTime(), glm::vec3(1, 1, 0));
 
-            m_shaderMaterials.SetVec3("light.position", lightPos);         // 灯光位置
-            m_shaderMaterials.SetVec3("viewPos",        camera.GetEye());  // 相机位置
+            m_shaderMaterials.SetVec3("light.position", lightPos);         // 鐏厜浣嶇疆
+            m_shaderMaterials.SetVec3("viewPos",        camera.GetEye());  // 鐩告満浣嶇疆
 
 
             // light properties
@@ -150,7 +150,7 @@ public:
 
         }
 
-        {  // 绘制光源 
+        {  // 缁樺埗鍏夋簮 
 
             modelMat = glm::mat4(1.0f);
             modelMat = glm::translate(modelMat, lightPos);
@@ -174,7 +174,7 @@ private:
     GLuint m_lightVAO = -1;
     GLuint m_VBO = -1;
 
-    // 着色器
+    // 鐫�鑹插櫒
     ShaderCube      m_shaderCube;
     ShaderMaterials m_shaderMaterials;
 

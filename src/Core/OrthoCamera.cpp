@@ -47,10 +47,10 @@ void OrthoCamera::RecalculateMatrix()
     float bottom = m_Position.y - halfHeight;
     float top = m_Position.y + halfHeight;
 
-    m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1000.0f, 1000.0f); // 扩展 zNear/zFar 范围
+    m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1000.0f, 1000.0f); // 鎵╁睍 zNear/zFar 鑼冨洿
 
-    // 这里是关键：
-    m_ViewMatrix = glm::translate(glm::mat4(1.0f), -m_Position); // x/y/z 都考虑进去
+    // 杩欓噷鏄叧閿細
+    m_ViewMatrix = glm::translate(glm::mat4(1.0f), -m_Position); // x/y/z 閮借�冭檻杩涘幓
 
     m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 }

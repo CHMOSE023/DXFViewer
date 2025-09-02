@@ -44,7 +44,7 @@ public:
             m_model       = glGetUniformLocation(m_shaderId, "model");
             m_view        = glGetUniformLocation(m_shaderId, "view");
             m_proj        = glGetUniformLocation(m_shaderId, "projection");
-            m_color       = glGetUniformLocation(m_shaderId, "color"); // 物体整体颜色
+            m_color       = glGetUniformLocation(m_shaderId, "color"); // 鐗╀綋鏁翠綋棰滆壊
 
         }
 

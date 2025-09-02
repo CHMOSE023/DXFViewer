@@ -41,7 +41,7 @@ public:
             
             void main()
             {
-                FragColor = vec4(lightColor * objectColor, 1.0);  // £¡£¡£¡ µÆ¹â * ÎïÌåÑÕÉ«
+                FragColor = vec4(lightColor * objectColor, 1.0);  // ï¼ï¼ï¼ ç¯å…‰ * ç‰©ä½“é¢œè‰²
             }
          )";
      
@@ -71,7 +71,7 @@ public:
          )";
 
 
-        // ´´½¨ shader
+        // åˆ›å»º shader
         m_lightingShader = CreateShader(lightingVS, lightingFS);
         m_cubeShader     = CreateShader(cubeVS, cubeFS);
 
@@ -166,7 +166,7 @@ public:
         glm::mat4 viewMat = camera.GetView();
         glm::mat4 modelMat = glm::mat4(1.0f);
 
-        {   // ÎïÌå
+        {   // ç‰©ä½“
             glUseProgram(m_lightingShader);
 
 
@@ -183,7 +183,7 @@ public:
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
-        {   // µÆ¹â
+        {   // ç¯å…‰
            
             glUseProgram(m_cubeShader);
 

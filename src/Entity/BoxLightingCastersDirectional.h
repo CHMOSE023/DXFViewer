@@ -1,5 +1,5 @@
 // BoxLightingCastersDirectional
-// Ö±Éä¹âÔ´
+// ç›´å°„å…‰æº
 #pragma once
 #include "Entity.h"
 #include "../Shader/ShaderCube.h"
@@ -25,7 +25,7 @@ public:
         m_shaderLightingCastersDirectional.Initialize();
 
         float vertices[] = {
-            // ¶¥µã                   // ·¨Ïß              // ÎÆÀí
+            // é¡¶ç‚¹                   // æ³•çº¿              // çº¹ç†
             -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
              0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
              0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
@@ -119,11 +119,11 @@ public:
         glm::mat4 viewMat = camera.GetView();
         glm::mat4 modelMat = glm::mat4(1.0f);
 
-        //  »æÖÆÎïÌå
+        //  ç»˜åˆ¶ç‰©ä½“
         m_shaderLightingCastersDirectional.Begin();
         {
             // be sure to activate shader when setting uniforms/drawing objects               
-            m_shaderLightingCastersDirectional.SetVec3("light.direction", -0.2f, -1.0f, -0.3f); // ¶¨Ïò¹â·½Ïò
+            m_shaderLightingCastersDirectional.SetVec3("light.direction", -0.2f, -1.0f, -0.3f); // å®šå‘å…‰æ–¹å‘
             m_shaderLightingCastersDirectional.SetVec3("viewPos", camera.GetEye());
 
             // light properties
@@ -151,7 +151,7 @@ public:
             glBindTexture(GL_TEXTURE_2D, m_specularMap);
 
             
-            // »æÖÆ10¸öÁ¢·½Ìå
+            // ç»˜åˆ¶10ä¸ªç«‹æ–¹ä½“
             glBindVertexArray(m_cubeVAO);
             for (GLuint i = 0; i < 10; i++)
             {                    

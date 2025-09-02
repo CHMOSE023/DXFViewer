@@ -28,12 +28,12 @@ public:
         WCHAR* strSrc;
         LPSTR szRes;
 
-        //»ñµÃÁÙÊ±±äÁ¿µÄ´óĞ¡
+        //è·å¾—ä¸´æ—¶å˜é‡çš„å¤§å°
         int i = MultiByteToWideChar(CP_UTF8, 0, str, -1, NULL, 0);
         strSrc = new WCHAR[i + 1];
         MultiByteToWideChar(CP_UTF8, 0, str, -1, strSrc, i);
 
-        //»ñµÃÁÙÊ±±äÁ¿µÄ´óĞ¡
+        //è·å¾—ä¸´æ—¶å˜é‡çš„å¤§å°
         i = WideCharToMultiByte(CP_ACP, 0, strSrc, -1, NULL, 0, NULL, NULL);
         szRes = new CHAR[i + 1];
         WideCharToMultiByte(CP_ACP, 0, strSrc, -1, szRes, i, NULL, NULL);
@@ -45,14 +45,14 @@ public:
         return result;
     }
 
-    // È¥³ıÇ°ºó¿Õ¸ñ
+    // å»é™¤å‰åç©ºæ ¼
     std::string trim(const std::string& str) {
         auto first = str.find_first_not_of(" \t\r\n");
         auto last = str.find_last_not_of(" \t\r\n");
         return (first == std::string::npos) ? "" : str.substr(first, last - first + 1);
     }
 
-    // ¶ÁÈ¡×éÂë-Öµ¶Ô
+    // è¯»å–ç»„ç -å€¼å¯¹
     bool ReadCodes(std::ifstream& file, std::string& code, std::string& value) {
         if (!std::getline(file, code)) return false;
         if (!std::getline(file, value)) return false;
@@ -74,17 +74,17 @@ public:
         };
 
         auto it = layerColors.find(layer);
-        return (it != layerColors.end()) ? it->second : glm::vec3(1.0); // Ä¬ÈÏÎª°×É«
+        return (it != layerColors.end()) ? it->second : glm::vec3(1.0); // é»˜è®¤ä¸ºç™½è‰²
     }
 
     /// <summary>
-    /// ¶ÁÈ¡Ö±Ïß
+    /// è¯»å–ç›´çº¿
     /// </summary> 
     void ReadLine(const std::string& filename)
     {
         std::ifstream file(filename, std::ios::binary);
         if (!file.is_open()) {
-            std::cerr << "ÎŞ·¨´ò¿ªÎÄ¼ş: " << filename << std::endl;
+            std::cerr << "æ— æ³•æ‰“å¼€æ–‡ä»¶: " << filename << std::endl;
             return;
         }
 
@@ -99,7 +99,7 @@ public:
         };
 
         while (ReadCodes(file, code, value)) {
-            // ¼ÇÂ¼µ±Ç°Í¼²ã£¨¿ÉÓÃÓÚºóĞøÑÕÉ«´¦Àí£©
+            // è®°å½•å½“å‰å›¾å±‚ï¼ˆå¯ç”¨äºåç»­é¢œè‰²å¤„ç†ï¼‰
             if (code == "100" && value == "AcDbEntity") {
                 while (ReadCodes(file, code, value)) {
                     if (code == "8") {
@@ -109,7 +109,7 @@ public:
                 }
             }
 
-            // ½âÎö AcDbLine
+            // è§£æ AcDbLine
             if (code == "100" && value == "AcDbLine") {
                 lineEntity.clear();
 
@@ -120,7 +120,7 @@ public:
                     }
 
                     if (lineEntity.size() == 6) {
-                        // ¶ÁÈ¡Íê±ÏºóÔÙ½âÎö + Ìí¼ÓÖ±Ïß
+                        // è¯»å–å®Œæ¯•åå†è§£æ + æ·»åŠ ç›´çº¿
                         glm::vec3 start(
                             std::stof(lineEntity["StartX"]),
                             std::stof(lineEntity["StartY"]),
@@ -132,7 +132,7 @@ public:
                             std::stof(lineEntity["EndZ"])
                         );
 
-                        glm::vec3 color = GetColorByLayer(currentLayer); // ¿ÉÑ¡
+                        glm::vec3 color = GetColorByLayer(currentLayer); // å¯é€‰
 
                         // m_line.AddLine(start, end, color);
 
@@ -150,7 +150,7 @@ public:
 
 	virtual void  Startup()
 	{          
-        // ½âÎöÎÄ¼ş
+        // è§£ææ–‡ä»¶
         ReadLine(R"(.\Dxf\line.dxf)");
 
         m_part.Serialize();
@@ -168,14 +168,14 @@ public:
         m_dc->Initialize();
 
 
-        printf(" %d ¸öÊµÌå\r\n", (m_part.GetEntityCount()));
+        printf(" %d ä¸ªå®ä½“\r\n", (m_part.GetEntityCount()));
 	}; 
 
 	virtual void  Render()
 	{		  
-        glLineWidth(1.0f); // ÉèÖÃÏß¿íÎª 1 ÏñËØ
+        glLineWidth(1.0f); // è®¾ç½®çº¿å®½ä¸º 1 åƒç´ 
 		m_line.Render(m_camera);
-        glLineWidth(1.0f); // ÉèÖÃÏß¿íÎª 2 ÏñËØ
+        glLineWidth(1.0f); // è®¾ç½®çº¿å®½ä¸º 2 åƒç´ 
 		m_circle.Render(m_camera); 
 
         m_part.Draw(m_dc); 

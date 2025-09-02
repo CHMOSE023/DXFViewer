@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 /// <summary>
-/// ÉäÏßÀà
+/// å°„çº¿ç±»
 /// </summary>
 class Ray
 {
@@ -11,16 +11,16 @@ public:
   ~Ray() {};
 
 public:
-    void SetOrigin(const glm::vec3& origin);      // ÉèÖÃÉäÏßµÄÆğµã	
-    void SetDirection(const glm::vec3& direction);// ÉèÖÃÉäÏßµÄ·½Ïò
-    void ScreenPointToRay(                        // ´ÓÆÁÄ»¿Õ¼ä²úÉúÒ»ÌõÉäÏßÀà
+    void SetOrigin(const glm::vec3& origin);      // è®¾ç½®å°„çº¿çš„èµ·ç‚¹	
+    void SetDirection(const glm::vec3& direction);// è®¾ç½®å°„çº¿çš„æ–¹å‘
+    void ScreenPointToRay(                        // ä»å±å¹•ç©ºé—´äº§ç”Ÿä¸€æ¡å°„çº¿ç±»
         const glm::dvec2& screenPoint,
         const glm::dmat4& projectionMatrix,
         const glm::dmat4& viewMatrix, 
         const glm::dvec4& viewport
     );
 
-    glm::vec3 GetOrigin() const;                   // »ñÈ¡ÉäÏßµÄ·½Ïò
+    glm::vec3 GetOrigin() const;                   // è·å–å°„çº¿çš„æ–¹å‘
     glm::vec3 GetDirection() const;                // 
     glm::vec3 PointAt(float t) const;
 

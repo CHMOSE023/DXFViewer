@@ -1,4 +1,4 @@
-//  ¶¨Ïò¹âshader Directional Light
+//  å®šå‘å…‰shader Directional Light
 #pragma once
 #include <vector>
 #include <string>
@@ -40,14 +40,14 @@ public:
 		
 		    #version 330 core
 		
-			// ²ÄÖÊ
+			// æè´¨
 			struct Material {
-			    sampler2D diffuse;	   // £¡£¡£¡2DÎÆÀí
-			    sampler2D specular;    // £¡£¡£¡2DÎÆÀí
+			    sampler2D diffuse;	   // ï¼ï¼ï¼2Dçº¹ç†
+			    sampler2D specular;    // ï¼ï¼ï¼2Dçº¹ç†
 			    float     shininess;
 			}; 
             
-            //Ö±Éä¹â
+            //ç›´å°„å…‰
 			struct DirLight {
 			    vec3 direction;
 				
@@ -56,7 +56,7 @@ public:
 			    vec3 specular;
 			};
 
-			// µã¹âÔ´
+			// ç‚¹å…‰æº
 			struct PointLight {
 			    vec3 position;
 			    
@@ -69,25 +69,25 @@ public:
 			    vec3 specular;
 			};	
 		
-            // Í¶Éä¹âÔ´
+            // æŠ•å°„å…‰æº
 			struct SpotLight  {
-			    vec3  position;    // ¹âÔ´Î»ÖÃ
-				vec3  direction;   // ¾Û¹âµÄ·½ÏòÏòÁ¿
-				float cutOff;      // ¾Û¹â°ë¾¶µÄÇĞ¹â½Ç
-				float outerCutOff; // ÍâÇĞ¹â½Ç
+			    vec3  position;    // å…‰æºä½ç½®
+				vec3  direction;   // èšå…‰çš„æ–¹å‘å‘é‡
+				float cutOff;      // èšå…‰åŠå¾„çš„åˆ‡å…‰è§’
+				float outerCutOff; // å¤–åˆ‡å…‰è§’
 			   
 			    vec3 ambient;
 			    vec3 diffuse;
 			    vec3 specular;
 
-                // Ë¥¼õ¹«Ê½  ÊµÏÖË¥¼õ ¶àÏîÊ½ ³£Á¿¡¢Ò»´ÎÏîºÍ¶ş´ÎÏî  ¼ÆËã lightDir
+                // è¡°å‡å…¬å¼  å®ç°è¡°å‡ å¤šé¡¹å¼ å¸¸é‡ã€ä¸€æ¬¡é¡¹å’ŒäºŒæ¬¡é¡¹  è®¡ç®— lightDir
 				float constant;
 				float linear;
 				float quadratic;
 
 			};
 
-			// µã¹âÔ´ÊıÁ¿
+			// ç‚¹å…‰æºæ•°é‡
 			#define NR_POINT_LIGHTS 4 
 
 			in vec3 FragPos;  
@@ -100,7 +100,7 @@ public:
 			uniform SpotLight  spotLight;
 			uniform Material   material;
 
-			// µÆ¹â¼ÆËãº¯Êı
+			// ç¯å…‰è®¡ç®—å‡½æ•°
 			vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir);
 			vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 			vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
@@ -219,13 +219,13 @@ public:
 			uniform["projection"]         = glGetUniformLocation(m_shaderId,"projection");
 			uniform["viewPos"]            = glGetUniformLocation(m_shaderId,"viewPos");
 			
-			// Ö±Éä¹â
+			// ç›´å°„å…‰
 			uniform["dirLight.direction"]     = glGetUniformLocation(m_shaderId, "dirLight.direction");
 			uniform["dirLight.ambient"]       = glGetUniformLocation(m_shaderId, "dirLight.ambient");
 			uniform["dirLight.diffuse"]       = glGetUniformLocation(m_shaderId, "dirLight.diffuse");
 			uniform["dirLight.specular"]      = glGetUniformLocation(m_shaderId, "dirLight.specular");
 			
-			// Í¶Éä¹â
+			// æŠ•å°„å…‰
 			uniform["spotLight.position"]     = glGetUniformLocation(m_shaderId, "spotLight.position");
 			uniform["spotLight.direction"]    = glGetUniformLocation(m_shaderId, "spotLight.direction");
 			uniform["spotLight.cutOff"]       = glGetUniformLocation(m_shaderId, "spotLight.cutOff");
@@ -239,7 +239,7 @@ public:
 			uniform["spotLight.diffuse"]      = glGetUniformLocation(m_shaderId, "spotLight.diffuse");
 			uniform["spotLight.specular"]     = glGetUniformLocation(m_shaderId, "spotLight.specular");
 									      
-			// ²ÄÖÊ
+			// æè´¨
 			uniform["material.diffuse"]       = glGetUniformLocation(m_shaderId, "material.diffuse");
 			uniform["material.specular"]      = glGetUniformLocation(m_shaderId, "material.specular");
 			uniform["material.shininess"]     = glGetUniformLocation(m_shaderId, "material.shininess");
@@ -254,7 +254,7 @@ public:
 
 			for (std::string point : pointes)
 			{
-				// µã¹âÔ´
+				// ç‚¹å…‰æº
 				uniform[point + "position"]  = glGetUniformLocation(m_shaderId, (point + "position").c_str());
 				uniform[point + "ambient"]   = glGetUniformLocation(m_shaderId, (point + "ambient").c_str());
 				uniform[point + "diffuse"]   = glGetUniformLocation(m_shaderId, (point + "diffuse").c_str());

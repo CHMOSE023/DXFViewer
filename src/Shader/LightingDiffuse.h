@@ -54,9 +54,9 @@ public:
                     vec3  ambient         = ambientStrength * lightColor;
 
                     // diffuse
-                    vec3  norm     = normalize( Normal );                    // πÊ∏ÒªØ
+                    vec3  norm     = normalize( Normal );                    // ËßÑÊ†ºÂåñ
                     vec3  lightDir = normalize( lightPos - FragPos );        // 
-                    float diff     = max( dot ( norm, lightDir ),0.0 );      // Ωÿ»°◊Ó¥Û÷µ
+                    float diff     = max( dot ( norm, lightDir ),0.0 );      // Êà™ÂèñÊúÄÂ§ßÂÄº
                     vec3  diffuse  = diff * lightColor;                      //
                     vec3  result   = ( ambient + diffuse ) * objectColor;     //
 

@@ -1,7 +1,7 @@
-// ¾Û¹âµÆ
-// ¾Û¹âÊÇÒ»ÖÖÎ»ÓÚ»·¾³ÖĞÄ³´¦µÄ¹âÔ´£¬Ëü²»ÊÇÏòËùÓĞ·½ÏòÕÕÉä£¬¶øÊÇÖ»³¯Ä³¸ö·½ÏòÕÕÉä¡£
-// ½á¹ûÊÇÖ»ÓĞÒ»¸ö¾Û¹âÕÕÉä·½ÏòµÄÈ·¶¨°ë¾¶ÄÚµÄÎïÌå²Å»á±»ÕÕÁÁ£¬ÆäËûµÄ¶¼±£³ÖºÚ°µ¡£
-// ¾Û¹âµÄºÃÀı×ÓÊÇÂ·µÆ»òÊÖµçÍ²¡£
+// èšå…‰ç¯
+// èšå…‰æ˜¯ä¸€ç§ä½äºç¯å¢ƒä¸­æŸå¤„çš„å…‰æºï¼Œå®ƒä¸æ˜¯å‘æ‰€æœ‰æ–¹å‘ç…§å°„ï¼Œè€Œæ˜¯åªæœæŸä¸ªæ–¹å‘ç…§å°„ã€‚
+// ç»“æœæ˜¯åªæœ‰ä¸€ä¸ªèšå…‰ç…§å°„æ–¹å‘çš„ç¡®å®šåŠå¾„å†…çš„ç‰©ä½“æ‰ä¼šè¢«ç…§äº®ï¼Œå…¶ä»–çš„éƒ½ä¿æŒé»‘æš—ã€‚
+// èšå…‰çš„å¥½ä¾‹å­æ˜¯è·¯ç¯æˆ–æ‰‹ç”µç­’ã€‚
 #pragma once
 #include "Entity.h"
 #include "../Shader/ShaderCube.h"
@@ -23,11 +23,11 @@ public:
 
 	void Init()
 	{      
-        m_shaderCube.Initialize(); // ³õÊ¼»¯ shander
-        m_shaderLightingCastersSpotSoft.Initialize(); // ³õÊ¼»¯ shander
+        m_shaderCube.Initialize(); // åˆå§‹åŒ– shander
+        m_shaderLightingCastersSpotSoft.Initialize(); // åˆå§‹åŒ– shander
 
         float vertices[] = {
-            // ¶¥µã                   // ·¨Ïß              // ÎÆÀí
+            // é¡¶ç‚¹                   // æ³•çº¿              // çº¹ç†
             -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
              0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
              0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
@@ -124,14 +124,14 @@ public:
         glm::mat4 viewMat = camera.GetView();
         glm::mat4 modelMat = glm::mat4(1.0f);
        
-        //  »æÖÆÎïÌå
+        //  ç»˜åˆ¶ç‰©ä½“
         m_shaderLightingCastersSpotSoft.Begin();
         {
             // be sure to activate shader when setting uniforms/drawing objects               
             m_shaderLightingCastersSpotSoft.SetVec3("light.position", lightPos); 
-            m_shaderLightingCastersSpotSoft.SetVec3("light.direction", camera.GetDir()); //  ¾Û¹âµÄ·½ÏòÏòÁ¿
-            m_shaderLightingCastersSpotSoft.SetFloat("light.cutOff", glm::cos(glm::radians(12.5f))); // ¾Û¹âµÄ ÇĞ¹â½Ç¶¨Òå ¾Û¹â°ë¾¶µÄÇĞ¹â½Ç¡£Ã¿¸öÂäÔÚÕâ¸ö½Ç¶ÈÖ®ÍâµÄ£¬¾Û¹â¶¼²»»áÕÕÁÁ¡£
-            m_shaderLightingCastersSpotSoft.SetFloat("light.outerCutOff", glm::cos(glm::radians(17.5f))); // ¾Û¹âµÄ ÇĞ¹â½Ç¶¨Òå ¾Û¹â°ë¾¶µÄÇĞ¹â½Ç¡£Ã¿¸öÂäÔÚÕâ¸ö½Ç¶ÈÖ®ÍâµÄ£¬¾Û¹â¶¼²»»áÕÕÁÁ¡£
+            m_shaderLightingCastersSpotSoft.SetVec3("light.direction", camera.GetDir()); //  èšå…‰çš„æ–¹å‘å‘é‡
+            m_shaderLightingCastersSpotSoft.SetFloat("light.cutOff", glm::cos(glm::radians(12.5f))); // èšå…‰çš„ åˆ‡å…‰è§’å®šä¹‰ èšå…‰åŠå¾„çš„åˆ‡å…‰è§’ã€‚æ¯ä¸ªè½åœ¨è¿™ä¸ªè§’åº¦ä¹‹å¤–çš„ï¼Œèšå…‰éƒ½ä¸ä¼šç…§äº®ã€‚
+            m_shaderLightingCastersSpotSoft.SetFloat("light.outerCutOff", glm::cos(glm::radians(17.5f))); // èšå…‰çš„ åˆ‡å…‰è§’å®šä¹‰ èšå…‰åŠå¾„çš„åˆ‡å…‰è§’ã€‚æ¯ä¸ªè½åœ¨è¿™ä¸ªè§’åº¦ä¹‹å¤–çš„ï¼Œèšå…‰éƒ½ä¸ä¼šç…§äº®ã€‚
             m_shaderLightingCastersSpotSoft.SetVec3("viewPos", lightPos);
 
             // light properties
@@ -158,7 +158,7 @@ public:
             glBindTexture(GL_TEXTURE_2D, m_specularMap);
 
             
-            // »æÖÆ10¸öÁ¢·½Ìå
+            // ç»˜åˆ¶10ä¸ªç«‹æ–¹ä½“
             glBindVertexArray(m_cubeVAO);
             for (GLuint i = 0; i < 10; i++)
             {                    
@@ -175,7 +175,7 @@ public:
        
 
         
-        // {  // »æÖÆ¹âÔ´ 
+        // {  // ç»˜åˆ¶å…‰æº 
         //
         //     modelMat = glm::mat4(1.0f);
         //     modelMat = glm::translate(modelMat, lightPos);

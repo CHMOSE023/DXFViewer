@@ -4,13 +4,13 @@
 class DepthTesting : public Entity
 {
 public :
-	virtual void Init()  // Êı¾İ×¼±¸
+	virtual void Init()  // æ•°æ®å‡†å¤‡
 	{
-		glDepthFunc(GL_LESS);// ÓÀÔ¶Í¨¹ı²âÊÔ
+		glDepthFunc(GL_LESS);// æ°¸è¿œé€šè¿‡æµ‹è¯•
         m_shader.Initialize();
 
         float cubeVertices[] = {
-            // ¶¥µã               // uv
+            // é¡¶ç‚¹               // uv
             -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
              0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
              0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -64,7 +64,7 @@ public :
              5.0f, -0.5f, -5.0f,  2.0f, 2.0f
         };
 
-        // Á¢·½Ìå VAO        
+        // ç«‹æ–¹ä½“ VAO        
         glGenVertexArrays(1, &m_cubeVao);
         glGenBuffers(1, &m_cubeVbo);
         glBindVertexArray(m_cubeVao);
@@ -76,7 +76,7 @@ public :
         glVertexAttribPointer(m_shader.m_uv, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
         glBindVertexArray(0);
        
-        // µØÃæ VAO
+        // åœ°é¢ VAO
         glGenVertexArrays(1, &m_planeVao);
         glGenBuffers(1, &m_planeVbo);
         glBindVertexArray(m_planeVao);
@@ -97,7 +97,7 @@ public :
 
 
         m_shader.Begin();
-        // »æÖÆºĞ×Ó1
+        // ç»˜åˆ¶ç›’å­1
         glBindVertexArray(m_cubeVao);
 
         glActiveTexture(GL_TEXTURE0);
@@ -109,13 +109,13 @@ public :
        // modelMat = glm::translate(modelMat, glm::vec3(-1.0f, 0.0f, -1.0f));
         m_shader.SetMat4("model", modelMat);       
         glDrawArrays(GL_TRIANGLES,0,36);
-        // »æÖÆºĞ×Ó2
+        // ç»˜åˆ¶ç›’å­2
         modelMat = glm::mat4(1.0f);
         modelMat = glm::translate(modelMat, glm::vec3(2.0f, 0.0f, 0.0f));
         m_shader.SetMat4("model", modelMat);
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
-        // »æÖÆµØÃæ
+        // ç»˜åˆ¶åœ°é¢
         glBindVertexArray(m_planeVao);
         glBindTexture(GL_TEXTURE_2D, m_florTexture);
         m_shader.SetMat4("model", modelMat);

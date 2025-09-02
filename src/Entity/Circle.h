@@ -7,7 +7,7 @@
 class Circle {
 public:
     Circle() : m_vao(0), m_vbo(0), m_ssbo(0) {
-        // Éú³Éµ¥Î»Ô²¶¥µã£¨ÓÃÓÚ GL_LINE_LOOP£©
+        // ç”Ÿæˆå•ä½åœ†é¡¶ç‚¹ï¼ˆç”¨äº GL_LINE_LOOPï¼‰
         const int segments = 100;
         for (int i = 0; i < segments; ++i) {
             float angle = glm::radians(360.0f * i / static_cast<float>(segments));
@@ -25,7 +25,7 @@ public:
     void Init() {
         m_shader.Initialize();
 
-        // ´´½¨ VAO + VBO£¨µ¥Î»Ô²¶¥µã£©
+        // åˆ›å»º VAO + VBOï¼ˆå•ä½åœ†é¡¶ç‚¹ï¼‰
         glGenVertexArrays(1, &m_vao);
         glBindVertexArray(m_vao);
 
@@ -39,7 +39,7 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
 
-        // ´´½¨ SSBO
+        // åˆ›å»º SSBO
         glGenBuffers(1, &m_ssbo);
     }
 

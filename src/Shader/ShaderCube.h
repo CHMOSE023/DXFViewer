@@ -2,7 +2,7 @@
 #include  "../Shader/Shader.h"
 #include  <map>
 #include <string>
-// ¹âÔ´ĞÎ×´
+// å…‰æºå½¢çŠ¶
 class ShaderCube : public Shader
 {
 public:

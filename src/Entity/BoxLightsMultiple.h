@@ -18,11 +18,11 @@ public:
 
     void Init()
     {
-        m_shaderCube.Initialize(); // ³õÊ¼»¯ shander
-        m_shaderLightsMultiple.Initialize(); // ³õÊ¼»¯ shander
+        m_shaderCube.Initialize(); // åˆå§‹åŒ– shander
+        m_shaderLightsMultiple.Initialize(); // åˆå§‹åŒ– shander
 
         float vertices[] = {
-            // ¶¥µã                   // ·¨Ïß              // ÎÆÀí
+            // é¡¶ç‚¹                   // æ³•çº¿              // çº¹ç†
             -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
              0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
              0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
@@ -119,7 +119,7 @@ public:
         glm::mat4 viewMat = camera.GetView();
         glm::mat4 modelMat = glm::mat4(1.0f);
 
-        // µã¹âÔ´Î»ÖÃ
+        // ç‚¹å…‰æºä½ç½®
         static  glm::vec3 pointLightPositions[] =
         {
              glm::vec3(0.7f,  0.2f,  2.0f),
@@ -128,16 +128,16 @@ public:
              glm::vec3(0.0f,  0.0f, -3.0f)
         };
 
-        //  »æÖÆÎïÌå
+        //  ç»˜åˆ¶ç‰©ä½“
         m_shaderLightsMultiple.Begin();
         {
             m_shaderLightsMultiple.SetVec3("viewPos", camera.GetEye());
             m_shaderLightsMultiple.SetFloat("material.shininess", 32.0f);
 
-            // ÔÚÕâÀï£¬ÎÒÃÇÎªÎÒÃÇÓµÓĞµÄ 5/6 ÖÖµÆÉèÖÃÁËËùÓĞÖÆ·ş¡£ÎÒÃÇ±ØĞëÊÖ¶¯ÉèÖÃËüÃÇ²¢±àÖÆË÷Òı
-            // Êı×éÖĞÓÃÓÚÉèÖÃÃ¿¸öÍ³Ò»±äÁ¿µÄÕıÈ· PointLight ½á¹¹¡£Õâ¿ÉÒÔ¸üÓĞÀûÓÚ´úÂë
-            // Í¨¹ı½«¹âÔ´ÀàĞÍ¶¨ÒåÎªÀà²¢ÔÚÆäÖĞÉèÖÃËüÃÇµÄÖµ£¬»òÕßÊ¹ÓÃ¸üÓĞĞ§µÄÍ³Ò»·½·¨
-            // Í¨¹ıÊ¹ÓÃ¡°Í³Ò»»º³åÇø¶ÔÏó¡±£¬µ«ÎÒÃÇ½«ÔÚ¡°¸ß¼¶ GLSL¡±½Ì³ÌÖĞÌÖÂÛ¡£
+            // åœ¨è¿™é‡Œï¼Œæˆ‘ä»¬ä¸ºæˆ‘ä»¬æ‹¥æœ‰çš„ 5/6 ç§ç¯è®¾ç½®äº†æ‰€æœ‰åˆ¶æœã€‚æˆ‘ä»¬å¿…é¡»æ‰‹åŠ¨è®¾ç½®å®ƒä»¬å¹¶ç¼–åˆ¶ç´¢å¼•
+            // æ•°ç»„ä¸­ç”¨äºè®¾ç½®æ¯ä¸ªç»Ÿä¸€å˜é‡çš„æ­£ç¡® PointLight ç»“æ„ã€‚è¿™å¯ä»¥æ›´æœ‰åˆ©äºä»£ç 
+            // é€šè¿‡å°†å…‰æºç±»å‹å®šä¹‰ä¸ºç±»å¹¶åœ¨å…¶ä¸­è®¾ç½®å®ƒä»¬çš„å€¼ï¼Œæˆ–è€…ä½¿ç”¨æ›´æœ‰æ•ˆçš„ç»Ÿä¸€æ–¹æ³•
+            // é€šè¿‡ä½¿ç”¨â€œç»Ÿä¸€ç¼“å†²åŒºå¯¹è±¡â€ï¼Œä½†æˆ‘ä»¬å°†åœ¨â€œé«˜çº§ GLSLâ€æ•™ç¨‹ä¸­è®¨è®ºã€‚
 
             // directional light
             m_shaderLightsMultiple.SetVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
@@ -201,7 +201,7 @@ public:
             glBindTexture(GL_TEXTURE_2D, m_specularMap);
 
 
-            // »æÖÆ10¸öÁ¢·½Ìå
+            // ç»˜åˆ¶10ä¸ªç«‹æ–¹ä½“
             glBindVertexArray(m_cubeVAO);
             for (GLuint i = 0; i < 10; i++)
             {
@@ -218,7 +218,7 @@ public:
 
 
 
-        // »æÖÆ¹âÔ´Î»ÖÃ
+        // ç»˜åˆ¶å…‰æºä½ç½®
 
         m_shaderCube.Begin();
 
