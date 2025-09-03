@@ -1,4 +1,4 @@
-# CMake配置文件
+﻿# CMake配置文件
 cmake_minimum_required (VERSION 3.8)
 project ("DXFViewer")
 
@@ -6,19 +6,15 @@ project ("DXFViewer")
 set(CMAKE_CXX_STANDARD 17)            # 指定 C++17 标准
 set(CMAKE_CXX_STANDARD_REQUIRED YES)  # 确保 C++17 标准是必须的
 set(CMAKE_CXX_EXTENSIONS OFF)         # 禁用编译器特有的扩展
-
-add_definitions("-DUNICODE" "-D_UNICODE")
-if(MSVC) 
-   add_compile_options(/utf-8) #  设置为UTF-8编码  
-endif()
+ 
+add_definitions("-DUNICODE" "-D_UNICODE") # 定义UNICODE宏
+ 
 
 # 搜索目录
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/deps/include/")            # 包含文件搜索目录 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/extlib/glm/")              # 包含文件搜索目录 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/extlib/glfw/include")      # 包含文件搜索目录
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/extlib/libdxfrw")          # 包含文件搜索目录
-#link_directories   ("${CMAKE_CURRENT_SOURCE_DIR}/deps/lib")                # 连接器搜索目录
-#link_directories   ("${CMAKE_CURRENT_SOURCE_DIR}/src/core")                # 核心库
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/extlib/libdxfrw")          # 包含文件搜索目录 
 
 # 添加编译宏
 add_compile_definitions(
@@ -66,6 +62,4 @@ foreach(Example ${EXAMPLES} )
     add_executable (${Example}  ${SrcFile} ) 
     target_link_libraries(${Example} openGL32 glad core dxfrw  glfw)
 endforeach()
-
-
-# target_link_libraries(Test03-Nuklear  glew32 )
+ 

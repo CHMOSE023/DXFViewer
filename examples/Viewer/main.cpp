@@ -4,7 +4,7 @@
 #endif 
 int main() {
 #ifdef _WIN32 
-	SetConsoleOutputCP(CP_UTF8);
+	//SetConsoleOutputCP(CP_UTF8);
 #endif 
 	DXFViewer* app = new DXFViewer();
 	app->Initialize(800, 600, "DxfViewer");	 
