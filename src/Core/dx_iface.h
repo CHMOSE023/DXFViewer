@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
 **  dwg2dxf - Program to convert dwg/dxf to dxf(ascii & binary)              **
 **                                                                           **
 **  Copyright (C) 2015 José F. Soriano, rallazz@gmail.com                    **
@@ -13,8 +13,8 @@
 #ifndef DX_IFACE_H
 #define DX_IFACE_H
 
-#include "drw_interface.h"
-#include "libdxfrw.h"
+#include "../libdxfrw/libdxfrw.h" 
+#include "../libdxfrw/drw_interface.h"
 #include "dx_data.h"
 
 class dx_iface : public DRW_Interface {
@@ -226,10 +226,16 @@ public:
         for (std::list<DRW_AppId>::iterator it = cData->appIds.begin(); it != cData->appIds.end(); ++it)
             dxfW->writeAppId(&(*it));
     }
-
-    dxfRW* dxfW; //pointer to writer, needed to send data
-    dx_data* cData; // class to store or read data
+       
+    virtual void addView(const DRW_View& data) {};   
+    virtual void addUCS(const DRW_UCS& data) {};
+    virtual void addTolerance(const DRW_Tolerance& tol) {};
+    virtual void writeViews() {};
+    virtual void writeUCSs() {};
+     
+    dxfRW* dxfW; 
+    dx_data* cData;
     dx_ifaceBlock* currentBlock;
 };
 
-#endif // DX_IFACE_H
+#endif

@@ -1,6 +1,6 @@
 #include <iostream>
-#include "dx_iface.h"
-#include "dx_data.h"
+#include "../../src/Core/dx_iface.h"
+#include "../../src/Core/dx_data.h"
 
 #ifdef _WIN32
 #include <windows.h> 

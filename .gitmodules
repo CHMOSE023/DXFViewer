@@ -1,6 +1,3 @@
-[submodule "extlib/libdxfrw"]
-	path = extlib/libdxfrw
-	url = https://github.com/solvespace/libdxfrw.git
 [submodule "extlib/glfw"]
 	path = extlib/glfw
 	url = https://github.com/glfw/glfw.git

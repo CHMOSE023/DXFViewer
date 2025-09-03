@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
 **  dwg2dxf - Program to convert dwg/dxf to dxf(ascii & binary)              **
 **                                                                           **
 **  Copyright (C) 2015 José F. Soriano, rallazz@gmail.com                    **
@@ -14,8 +14,8 @@
 #include <fstream>
 #include <algorithm>
 #include "dx_iface.h"
-#include "libdwgr.h"
-#include "libdxfrw.h" 
+#include "../libdxfrw/libdwgr.h"
+#include "../libdxfrw/libdxfrw.h" 
 
 
 bool dx_iface::fileImport(const std::string& fileI, dx_data* fData, bool debug) {
@@ -30,11 +30,11 @@ bool dx_iface::fileImport(const std::string& fileI, dx_data* fData, bool debug) 
 
     if (fileExt == "DXF") {
        
-        dxfRW* dxf = new dxfRW;
+        dxfRW* dxf = new dxfRW(fileI.c_str());
         if (debug) {
             dxf->setDebug(DRW::DebugLevel::Debug);
         }
-        bool success = dxf->read(ofs,this, false);
+        bool success = dxf->read(this, false);
         if (!success) {
             std::cout << "DXF file error: format " << dxf->getVersion() << " error " << dxf->getError() << std::endl;
         }
@@ -43,11 +43,11 @@ bool dx_iface::fileImport(const std::string& fileI, dx_data* fData, bool debug) 
     }
     else if (fileExt == "DWG") {
         //loads dwg
-        dwgR* dwg = new dwgR();
+        dwgR* dwg = new dwgR(fileI.c_str());
         if (debug) {
             dwg->setDebug(DRW::DebugLevel::Debug);
         }
-        bool success = dwg->read(ofs,this, false);
+        bool success = dwg->read(this, false);
         if (!success) {
             std::cout << "DWG file error: format " << dwg->getVersion() << " error " << dwg->getError() << std::endl;
         }
@@ -60,14 +60,11 @@ bool dx_iface::fileImport(const std::string& fileI, dx_data* fData, bool debug) 
 
 bool dx_iface::fileExport(const std::string& fileName, DRW::Version v, bool binary, dx_data* fData, bool debug) {
     cData = fData;
-    dxfW = new dxfRW();    
-
-    std::ofstream file(fileName);
-
+    dxfW = new dxfRW(fileName.c_str());  
     if (debug) {
         dxfW->setDebug(DRW::DebugLevel::Debug);
     }
-    bool success = dxfW->write(file,this, v, binary);
+    bool success = dxfW->write(this, v, binary);
     delete dxfW;
     return success;
 }
