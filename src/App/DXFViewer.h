@@ -111,15 +111,11 @@ public:
     }
 
 	virtual void  Startup()
-	{ 
-        // 解析文件 
-		const char* fileName = "./dwg/demo.dwg";  
+	{          
+        // 解析文件
+        ReadLine(R"(.\Dxf\line.dxf)");
 
-		dx_data fData;
-		dx_iface* input  = new dx_iface();
-		bool badState = input->fileImport(fileName, &fData, true);
-        
-        m_part = new Part();
+        m_part.Serialize();
 
         m_part->Serialize();
          
@@ -128,7 +124,9 @@ public:
         m_dc = new OpenGLDC(m_camera);
 
         m_dc->Initialize();
-         
+
+
+        printf(" %d 个实体\r\n", (m_part.GetEntityCount()));
 	}; 
 
 	virtual void  Render()

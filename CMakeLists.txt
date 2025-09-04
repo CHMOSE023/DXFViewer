@@ -8,6 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)  # 确保 C++17 标准是必须的
 set(CMAKE_CXX_EXTENSIONS OFF)         # 禁用编译器特有的扩展
  
 add_definitions("-DUNICODE" "-D_UNICODE") # 定义UNICODE宏 
+   add_compile_options(/utf-8) #  设置为UTF-8编码  
+endif()
+   add_compile_options(/utf-8) #  设置为UTF-8编码  
+endif()
 
 # 搜索目录
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/deps/include/")            # 包含文件搜索目录 
